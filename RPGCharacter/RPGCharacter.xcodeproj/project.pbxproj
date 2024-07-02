@@ -11,6 +11,10 @@
 		0FD0E8DF2C2B37C7008F566D /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD0E8DE2C2B37C7008F566D /* OnboardingView.swift */; };
 		0FD0E8E12C2B37C9008F566D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FD0E8E02C2B37C9008F566D /* Assets.xcassets */; };
 		0FD0E8E52C2B37C9008F566D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FD0E8E42C2B37C9008F566D /* Preview Assets.xcassets */; };
+		343420692C348B70004A5568 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343420682C348B70004A5568 /* ListView.swift */; };
+		3434206D2C348D16004A5568 /* CardCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3434206C2C348D16004A5568 /* CardCharacter.swift */; };
+		3434206F2C348EB5004A5568 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3434206E2C348EB5004A5568 /* Character.swift */; };
+		343420712C34910D004A5568 /* CharacterListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343420702C34910D004A5568 /* CharacterListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +24,10 @@
 		0FD0E8E02C2B37C9008F566D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0FD0E8E22C2B37C9008F566D /* RPGCharacter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RPGCharacter.entitlements; sourceTree = "<group>"; };
 		0FD0E8E42C2B37C9008F566D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		343420682C348B70004A5568 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		3434206C2C348D16004A5568 /* CardCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCharacter.swift; sourceTree = "<group>"; };
+		3434206E2C348EB5004A5568 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		343420702C34910D004A5568 /* CharacterListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +60,7 @@
 		0FD0E8DB2C2B37C7008F566D /* RPGCharacter */ = {
 			isa = PBXGroup;
 			children = (
+				3434206A2C348CE5004A5568 /* List */,
 				0FD0E8DC2C2B37C7008F566D /* RPGCharacterApp.swift */,
 				0FD0E8DE2C2B37C7008F566D /* OnboardingView.swift */,
 				0FD0E8E02C2B37C9008F566D /* Assets.xcassets */,
@@ -67,6 +76,25 @@
 				0FD0E8E42C2B37C9008F566D /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3434206A2C348CE5004A5568 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				3434206B2C348CF2004A5568 /* Components */,
+				343420682C348B70004A5568 /* ListView.swift */,
+				3434206E2C348EB5004A5568 /* Character.swift */,
+				343420702C34910D004A5568 /* CharacterListViewModel.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		3434206B2C348CF2004A5568 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				3434206C2C348D16004A5568 /* CardCharacter.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,8 +167,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				343420712C34910D004A5568 /* CharacterListViewModel.swift in Sources */,
 				0FD0E8DF2C2B37C7008F566D /* OnboardingView.swift in Sources */,
+				3434206D2C348D16004A5568 /* CardCharacter.swift in Sources */,
+				3434206F2C348EB5004A5568 /* Character.swift in Sources */,
 				0FD0E8DD2C2B37C7008F566D /* RPGCharacterApp.swift in Sources */,
+				343420692C348B70004A5568 /* ListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,7 +302,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RPGCharacter/Preview Content\"";
-				DEVELOPMENT_TEAM = B5BH4949Y8;
+				DEVELOPMENT_TEAM = MT4A7M75NC;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -284,7 +316,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.1;
@@ -308,7 +340,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RPGCharacter/Preview Content\"";
-				DEVELOPMENT_TEAM = B5BH4949Y8;
+				DEVELOPMENT_TEAM = MT4A7M75NC;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -322,7 +354,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.1;
