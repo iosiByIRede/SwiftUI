@@ -8,22 +8,34 @@
 import SwiftUI
 
 struct CardCharacter: View {
-    @Binding var cardName: String
-    @Binding var image: Image
+    var character: Character
+    
     var body: some View {
-        HStack {
-            image
-                .resizable()
-                .frame(width: 50, height: 50)
-            Spacer()
-            Text(cardName)
+            HStack(alignment: .center) {
+                character.image
+                    .resizable()
+                    .frame(width: 40, height: 40)
+                VStack(alignment: .leading) {
+                    Text(character.name)
+                        .font(.title2)
+                    HStack {
+                        Text("race:")
+                            .font(.headline)
+                        Text(character.race.rawValue)
+                    }
+                    HStack{
+                        Text("class:")
+                            .font(.headline)
+                        Text(character.career.rawValue)
+                    }
+                }
+                
+                .padding()
+                Spacer()
         }
     }
 }
 
 #Preview {
-    CardCharacter(
-        cardName: .constant("Caio"),
-        image: .constant(Image(systemName: "heart.fill"))
-    )
+    CardCharacter(character: Character(image: Image(systemName: "heart.fill"), name: "name", career: .archer, race: .dwarf))
 }

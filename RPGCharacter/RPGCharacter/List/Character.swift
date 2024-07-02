@@ -14,7 +14,7 @@ struct Character {
     var race: Race
 }
 
-enum RPGClass {
+enum RPGClass: String {
     case novice
     case swordsman
     case archer
@@ -22,7 +22,7 @@ enum RPGClass {
     case merchant
 }
 
-enum Race {
+enum Race: String {
     case human
     case elf
     case dwarf
