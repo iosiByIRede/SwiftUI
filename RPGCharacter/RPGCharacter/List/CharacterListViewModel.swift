@@ -10,57 +10,48 @@ import SwiftUI
 class CharacterListViewModel: ObservableObject {
     var characters: [Character] = [
         Character(
-            image: Image(systemName: "heart.fill"),
             name: "AorusElite",
-            career: .mage,
+            rpgClass: .mage,
             race: .human
         ),
         Character(
-            image: Image(systemName: "heart.fill"),
             name: "Frieren",
-            career: .mage,
+            rpgClass: .mage,
             race: .elf
         ),
         Character(
-            image: Image(systemName: "heart.fill"),
             name: "Marquinhos",
-            career: .swordsman,
+            rpgClass: .swordsman,
             race: .dwarf
         ),
         Character(
-            image: Image(systemName: "heart.fill"),
             name: "thraee",
-            career: .mage,
+            rpgClass: .mage,
             race: .orc
         ),
         Character(
-            image: Image(systemName: "heart.fill"),
             name: "Rubens",
-            career: .merchant,
+            rpgClass: .merchant,
             race: .human
         ),
         Character(
-            image: Image(systemName: "heart.fill"),
             name: "Ian",
-            career: .novice,
+            rpgClass: .novice,
             race: .orc
         ),
         Character(
-            image: Image(systemName: "heart.fill"),
             name: "Caio",
-            career: .archer,
+            rpgClass: .archer,
             race: .elf
         ),
         Character(
-            image: Image(systemName: "heart.fill"),
             name: "Magno",
-            career: .mage,
+            rpgClass: .mage,
             race: .human
         ),
         Character(
-            image: Image(systemName: "heart.fill"),
             name: "Pedro Design",
-            career: .novice,
+            rpgClass: .novice,
             race: .elf
         ),
         
