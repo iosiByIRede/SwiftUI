@@ -24,6 +24,17 @@ struct RPGBackground: View {
 
 struct ListView: View {
     @ObservedObject var viewModel: CharacterListViewModel = CharacterListViewModel()
+    init() {
+            // Customize the appearance of the navigation bar
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithTransparentBackground()
+            appearance.backgroundColor = .clear
+            appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+            appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        }
 
     var body: some View {
         ZStack {
@@ -31,15 +42,27 @@ struct ListView: View {
             VStack(alignment: .leading) {
                 List(viewModel.characters, id: \.name) { char in
                     CardCharacter(character: char)
-                        .listRowBackground(Color.white.blur(radius: 100))
+                        .padding()
+                        .listRowBackground(Color.brown.blur(radius: 50))
                 }
-                .listRowSpacing(20)
                 .listStyle(.plain)
+                .listRowSpacing(10)
+                .background(Color.clear)
+                
             }
+            .background(Color.clear)
+            .toolbar(content: {
+                ToolbarItem(id: "vish", placement: .topBarLeading) {
+                    EditButton()
+                }
+            })
         }
     }
 }
 
 #Preview {
-    ListView()
+    NavigationStack{
+        ListView()
+    }
+    .background(Color.clear)
 }
