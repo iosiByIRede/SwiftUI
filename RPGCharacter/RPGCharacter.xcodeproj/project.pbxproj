@@ -11,6 +11,7 @@
 		0FD0E8DF2C2B37C7008F566D /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD0E8DE2C2B37C7008F566D /* OnboardingView.swift */; };
 		0FD0E8E12C2B37C9008F566D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FD0E8E02C2B37C9008F566D /* Assets.xcassets */; };
 		0FD0E8E52C2B37C9008F566D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FD0E8E42C2B37C9008F566D /* Preview Assets.xcassets */; };
+		DD3CF5792C35D7D40059F8CB /* NewCharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3CF5782C35D7D40059F8CB /* NewCharacterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		0FD0E8E02C2B37C9008F566D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0FD0E8E22C2B37C9008F566D /* RPGCharacter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RPGCharacter.entitlements; sourceTree = "<group>"; };
 		0FD0E8E42C2B37C9008F566D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		DD3CF5782C35D7D40059F8CB /* NewCharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCharacterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 				0FD0E8E02C2B37C9008F566D /* Assets.xcassets */,
 				0FD0E8E22C2B37C9008F566D /* RPGCharacter.entitlements */,
 				0FD0E8E32C2B37C9008F566D /* Preview Content */,
+				DD3CF5782C35D7D40059F8CB /* NewCharacterView.swift */,
 			);
 			path = RPGCharacter;
 			sourceTree = "<group>";
@@ -139,6 +142,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD3CF5792C35D7D40059F8CB /* NewCharacterView.swift in Sources */,
 				0FD0E8DF2C2B37C7008F566D /* OnboardingView.swift in Sources */,
 				0FD0E8DD2C2B37C7008F566D /* RPGCharacterApp.swift in Sources */,
 			);
