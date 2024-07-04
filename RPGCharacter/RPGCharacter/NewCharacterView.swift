@@ -148,7 +148,7 @@ struct NewCharacterView: View {
     }
     
     var completionButton: some View {
-        Button(action: {print("a")}) {
+        Button(action: {print(newCharacter)}) {
             RoundedRectangle(cornerRadius: 20)
                 .foregroundStyle(checkCharacterData(character: newCharacter) ? .blue : .gray)
                 .frame(height: 80)
