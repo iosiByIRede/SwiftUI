@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct Character {
+struct Character: Identifiable {
+    var id: UUID = UUID()
     var imageURL: String?
     var name: String = "New Character"
     var rpgClass: RPGClass = .none

@@ -11,6 +11,9 @@ struct ListView: View {
     @ObservedObject var viewModel: CharacterListViewModel = CharacterListViewModel()
     
     @State var isGrouped: Bool = false
+    @State var isShowing: Bool = true
+    @State var menuIsShowing: Bool = false
+    @State var qualquer: String = ""
     
     var charactersByRace: [String: [Character]] {
         var characterByRace: [String: [Character]] = [:]
@@ -23,34 +26,59 @@ struct ListView: View {
         }
         return characterByRace
     } // Isso deveria ir pra VM, mas, deixo aqui?
-    var allRaces: [String] {Array(charactersByRace.keys)}
+    var allRaces: [String] {Array(charactersByRace.keys.sorted())}
     
     var body: some View {
         ZStack {
             imageBackground
-            
-            VStack(alignment: .leading) {
+            VStack() {
                 if(!isGrouped){
                     allCharactersList
                         .scrollContentBackground(.hidden)
-                }else {
+                        .padding(.top, 60)
+                } else {
                     groupedList
                         .scrollContentBackground(.hidden)// ISSO DAQUI É MUITO IMPORTANTE
                         .padding(EdgeInsets(top: 40, leading: 0, bottom: 0, trailing: 0))
+                        .padding(.top, 20)
                 }
                 
             }
             .overlay(alignment: .topTrailing) {
-                Button("Agrupar") {
-                    withAnimation(.easeInOut(duration: 0.2)) {
-                        isGrouped.toggle()
+                Menu(content: {
+                    Button("Agrupar") {
+                        withAnimation(.easeInOut(duration: 0.2)) {
+                            isGrouped.toggle()
+                        }
                     }
-                }
-                .padding()
+                    Button("Colapsar") {
+                        withAnimation(.easeInOut(duration: 0.2)) {
+                            isShowing.toggle()
+                        }
+                    }
+                    .disabled(!isGrouped)
+                    EditButton()
+                        .disabled(true)
+                    
+                }, label: {
+                    Image(systemName: "ellipsis.circle")
+                        .resizable()
+                        .frame(width: 26, height: 26)
+//                        .padding()
+                })
             }
-            .overlay(alignment: .topLeading) {
-                EditButton()
-                    .padding()
+            .overlay(alignment: .top) {
+                HStack{
+                    TextField(text: $qualquer) {
+                        Text("Comida")
+                    }// Acho que dá pra colocar na overlayer
+//                    .padding()
+                }
+                .foregroundColor(.white)
+                .frame(width: 300, height: 40)
+                .background(Color.black.opacity(0.5))
+                .cornerRadius(20)
+//                .padding(.top, 8)
             }
         }
     }
@@ -58,8 +86,7 @@ struct ListView: View {
     var groupedList: some View {
         List {
             ForEach(allRaces, id: \.self) { race in
-                
-                Section {
+                Section(isExpanded: $isShowing) {
                     ForEach(charactersByRace[race] ?? [], id:\.name){ char in
                         CardCharacter(character: char)
                             .listRowBackground(Color.clear)
@@ -75,7 +102,6 @@ struct ListView: View {
     var allCharactersList: some View {
         List(viewModel.characters, id: \.name) { char in
             CardCharacter(character: char)
-                .padding()
                 .listRowBackground(Color.clear)
         }
     }
@@ -85,7 +111,7 @@ struct ListView: View {
             .resizable()
             .overlay {
                 LinearGradient(colors: [Color.rpgGrayedBlue, Color.rpgLightBrown], startPoint: .top, endPoint: .bottom)
-                    .opacity(0.75)
+                    .opacity(0.45)
             }
             .ignoresSafeArea()
     }
@@ -93,5 +119,7 @@ struct ListView: View {
 }
 
 #Preview {
-    ListView()
+    NavigationStack{
+        ListView()
+    }
 }

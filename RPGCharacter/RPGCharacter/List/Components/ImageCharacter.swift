@@ -33,19 +33,39 @@ struct ImageCharacter: View {
     var rpgClass: RPGClass
     var body: some View {
         VStack{
-            imgChar
-                .resizable()
-                .scaledToFit()
-                .padding(10)
+            if(imageUrl != nil){
+                imgChar
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 100, height: 100)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+            }else {
+                imgChar
+                    .resizable()
+                    .scaledToFit()
+                    .padding(10)
+                    .foregroundStyle(borderColor)
+                    .frame(width: 75, height: 75)
+            }
         }
         .frame(width: 100, height: 100)
         .overlay(
             RoundedRectangle(cornerRadius: 10)
-                .stroke(borderColor, lineWidth: 4)
+                .stroke(borderColor, lineWidth: 2)
+        )
+        .background(
+            Color.rpgDarkBrown
+                .cornerRadius(10)
         )
     }
 }
 
 #Preview {
-    ImageCharacter(imageUrl: "rpg", race: .dwarf, rpgClass: .archer)
+    ZStack {
+        ImageCharacter(imageUrl: "rpg", race: .dwarf, rpgClass: .archer)
+    }
+    .padding()
+    .background {
+            Color.blue
+        }
 }

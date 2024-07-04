@@ -55,6 +55,7 @@ class CharacterListViewModel: ObservableObject {
             rpgClass: .novice,
             race: .elf
         ),
+        Character(name: "Particípio", rpgClass: .merchant, race: .dwarf)
         
     ]
 }
