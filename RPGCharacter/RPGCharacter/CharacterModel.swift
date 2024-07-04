@@ -1,8 +1,8 @@
 //
-//  Character.swift
+//  CharacterModel.swift
 //  RPGCharacter
 //
-//  Created by Caio de Almeida Pessoa on 02/07/24.
+//  Created by Ian Pacini on 03/07/24.
 //
 
 import SwiftUI
