@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct NewCharacterView: View {
     @State var newCharacter: Character = .init()
@@ -66,7 +67,7 @@ struct NewCharacterView: View {
         }
         .overlay {
             LinearGradient(colors: [Color.rpgGrayedBlue, Color.rpgLightBrown], startPoint: .top, endPoint: .bottom)
-                .opacity(0.75)
+                .opacity(0.45)
         }
         .ignoresSafeArea()
     }
