@@ -10,7 +10,7 @@ import PhotosUI
 
 struct NewCharacterView: View {
     @State var newCharacter: Character = .init()
-    @State var isShowingFileImporter: Bool = false
+    @State var pickerItem: PhotosPickerItem?
     
     var body: some View {
         ZStack {
@@ -45,19 +45,15 @@ struct NewCharacterView: View {
                 completionButton
             }
         }
-        .fileImporter( isPresented: $isShowingFileImporter, allowedContentTypes: [.image], allowsMultipleSelection: false, onCompletion: {
-            (Result) in
-            
-            do{
-                let fileURL = try Result.get()
-                self.newCharacter.imageURL = fileURL.first?.absoluteString
-                
-            }
-            catch{
-                print("error reading file (error.localizedDescription)")
-            }
-            
-        })
+        .onChange(of: pickerItem) {
+                    Task {
+                        if let loaded = try? await pickerItem?.loadTransferable(type: Image.self) {
+                            newCharacter.image = loaded
+                        } else {
+                            print("Failed")
+                        }
+                    }
+                }
     }
     
     var screenBackground: some View {
@@ -73,14 +69,13 @@ struct NewCharacterView: View {
     }
     
     var characterImage: some View {
-        Button(action: {isShowingFileImporter.toggle()}) {
+        PhotosPicker(selection: $pickerItem, matching: .not(.videos)) {
             Circle()
                 .foregroundStyle(.gray)
                 .overlay{
                     Circle()
                         .stroke()
                         .foregroundStyle(.white)
-                        .frame(width: 160, height: 160)
                 }
                 .overlay {
                     getCharacterImage(character: newCharacter)
@@ -165,22 +160,19 @@ struct NewCharacterView: View {
     }
     
     @ViewBuilder func getCharacterImage(character: Character) -> some View {
-        if character.imageURL == nil {
+        if let image =  character.image {
+            image
+                .resizable()
+                .clipShape(Circle())
+                .frame(width: 160, height: 160)
+            
+        } else {
             Image(systemName: character.rpgClass.getDefaultImage())
                 .resizable()
-                .frame(width: 80, height: 80)
                 .foregroundStyle(.white)
-        } else {
-            AsyncImage(url: URL(string: character.imageURL!)) { image in
-                    image
-                        .resizable()
-                        .scaledToFill()
-                } placeholder: {
-                    ProgressView()
-                }
-                .frame(width: 160, height: 160)
-                .clipShape(Circle())
+                .frame(width: 80, height: 80)
         }
+        
     }
     
     func checkCharacterData(character: Character) -> Bool {

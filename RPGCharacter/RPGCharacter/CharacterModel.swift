@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Character {
-    var imageURL: String?
+    var image: Image?
     var name: String = "New Character"
     var rpgClass: RPGClass = .none
     var race: Race = .none
