@@ -49,8 +49,7 @@ struct NewCharacterView: View {
             
             do{
                 let fileURL = try Result.get()
-                print(fileURL)
-                self.newCharacter.image = fileURL.first?.absoluteString
+                self.newCharacter.imageURL = fileURL.first?.absoluteString
                 
             }
             catch{
@@ -165,13 +164,13 @@ struct NewCharacterView: View {
     }
     
     @ViewBuilder func getCharacterImage(character: Character) -> some View {
-        if character.image == nil {
+        if character.imageURL == nil {
             Image(systemName: character.rpgClass.getDefaultImage())
                 .resizable()
                 .frame(width: 80, height: 80)
                 .foregroundStyle(.white)
         } else {
-            AsyncImage(url: URL(string: character.image!)) { image in
+            AsyncImage(url: URL(string: character.imageURL!)) { image in
                     image
                         .resizable()
                         .scaledToFill()
