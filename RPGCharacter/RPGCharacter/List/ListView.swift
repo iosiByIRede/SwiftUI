@@ -25,21 +25,10 @@ struct ListView: View {
     } // Isso deveria ir pra VM, mas, deixo aqui?
     var allRaces: [String] {Array(charactersByRace.keys)}
     
-    init() {
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithTransparentBackground()
-        appearance.backgroundColor = .clear
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
-    }
-    
     var body: some View {
         ZStack {
             imageBackground
-
+            
             VStack(alignment: .leading) {
                 if(!isGrouped){
                     allCharactersList
@@ -47,22 +36,22 @@ struct ListView: View {
                 }else {
                     groupedList
                         .scrollContentBackground(.hidden)// ISSO DAQUI É MUITO IMPORTANTE
+                        .padding(EdgeInsets(top: 40, leading: 0, bottom: 0, trailing: 0))
                 }
                 
             }
-            .toolbar(content: {
-                ToolbarItem(placement: .topBarLeading) {
-                    EditButton()// Personalizar esse botão
-                    
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("Agrupar") {
-                        withAnimation(.easeInOut(duration: 0.2)) {
-                            isGrouped.toggle()
-                        }
+            .overlay(alignment: .topTrailing) {
+                Button("Agrupar") {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        isGrouped.toggle()
                     }
                 }
-            })
+                .padding()
+            }
+            .overlay(alignment: .topLeading) {
+                EditButton()
+                    .padding()
+            }
         }
     }
     
@@ -101,11 +90,8 @@ struct ListView: View {
             .ignoresSafeArea()
     }
     
-//    var toolbar:
 }
 
 #Preview {
-    NavigationStack{
-        ListView()
-    }
+    ListView()
 }

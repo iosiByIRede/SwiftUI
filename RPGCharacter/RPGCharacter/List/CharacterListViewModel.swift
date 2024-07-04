@@ -10,6 +10,7 @@ import SwiftUI
 class CharacterListViewModel: ObservableObject {
     var characters: [Character] = [
         Character(
+            imageURL: "rpg",
             name: "AorusElite",
             rpgClass: .mage,
             race: .human
