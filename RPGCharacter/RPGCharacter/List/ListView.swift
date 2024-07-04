@@ -7,38 +7,23 @@
 
 import SwiftUI
 
-struct RPGBackground: View {
-    var body: some View {
-        ZStack{
-            LinearGradient(colors: [
-                Color.rpgLightBrown,
-                Color.rpgBrown,
-                Color.rpgGrayedBlue
-            ], startPoint: .topLeading, endPoint: .bottomTrailing)
-            Rectangle()
-                .fill(.clear)
-                .background(.regularMaterial)
-        }
-    }
-}
-
 struct ListView: View {
     @ObservedObject var viewModel: CharacterListViewModel = CharacterListViewModel()
     
     @State var isGrouped: Bool = false
     
-    var tentativa: [String: [Character]]{
-        var algo: [String: [Character]] = [:]
+    var charactersByRace: [String: [Character]] {
+        var characterByRace: [String: [Character]] = [:]
         viewModel.characters.forEach { character in
-            if(algo.keys.contains(character.race.rawValue)){
-                algo[character.race.rawValue]?.append(character)
+            if(characterByRace.keys.contains(character.race.rawValue)){
+                characterByRace[character.race.rawValue]?.append(character)
             }else {
-                algo[character.race.rawValue] = [character]
+                characterByRace[character.race.rawValue] = [character]
             }
         }
-        return algo
-    }
-    var allRaces: [String] {Array(tentativa.keys)}
+        return characterByRace
+    } // Isso deveria ir pra VM, mas, deixo aqui?
+    var allRaces: [String] {Array(charactersByRace.keys)}
     
     init() {
         let appearance = UINavigationBarAppearance()
@@ -53,38 +38,15 @@ struct ListView: View {
     
     var body: some View {
         ZStack {
-            Image("bricksBG")
-                .resizable()
-            
-                .overlay {
-                    LinearGradient(colors: [Color.rpgGrayedBlue, Color.rpgLightBrown], startPoint: .top, endPoint: .bottom)
-                        .opacity(0.75)
-                }
-                .ignoresSafeArea()
+            imageBackground
+
             VStack(alignment: .leading) {
                 if(!isGrouped){
-                    List(viewModel.characters, id: \.name) { char in
-                        CardCharacter(character: char)
-                            .padding()
-                            .listRowBackground(Color.clear)
-                    }
-                    .scrollContentBackground(.hidden)
+                    allCharactersList
+                        .scrollContentBackground(.hidden)
                 }else {
-                    
-                    List {
-                        
-                        ForEach(allRaces, id: \.self) { race in
-                            Section(header: Text(race).foregroundColor(.white)
-                                .font(.title)) {
-                                    ForEach(tentativa[race] ?? [], id:\.name){ char in
-                                        CardCharacter(character: char)
-                                        
-                                            .listRowBackground(Color.clear)
-                                    }
-                                }
-                        }
-                    }
-                    .scrollContentBackground(.hidden)// ISSO DAQUI É MUITO IMPORTANTE
+                    groupedList
+                        .scrollContentBackground(.hidden)// ISSO DAQUI É MUITO IMPORTANTE
                 }
                 
             }
@@ -95,7 +57,7 @@ struct ListView: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Agrupar") {
-                        withAnimation(.bouncy(duration: 1)) {
+                        withAnimation(.easeInOut(duration: 0.2)) {
                             isGrouped.toggle()
                         }
                     }
@@ -103,6 +65,43 @@ struct ListView: View {
             })
         }
     }
+    
+    var groupedList: some View {
+        List {
+            ForEach(allRaces, id: \.self) { race in
+                
+                Section {
+                    ForEach(charactersByRace[race] ?? [], id:\.name){ char in
+                        CardCharacter(character: char)
+                            .listRowBackground(Color.clear)
+                    }
+                } header: {
+                    Text(race).foregroundColor(.white)
+                        .font(.title)
+                }
+            }
+        }
+    }
+    
+    var allCharactersList: some View {
+        List(viewModel.characters, id: \.name) { char in
+            CardCharacter(character: char)
+                .padding()
+                .listRowBackground(Color.clear)
+        }
+    }
+    
+    var imageBackground: some View {
+        Image("bricksBG")
+            .resizable()
+            .overlay {
+                LinearGradient(colors: [Color.rpgGrayedBlue, Color.rpgLightBrown], startPoint: .top, endPoint: .bottom)
+                    .opacity(0.75)
+            }
+            .ignoresSafeArea()
+    }
+    
+//    var toolbar:
 }
 
 #Preview {
