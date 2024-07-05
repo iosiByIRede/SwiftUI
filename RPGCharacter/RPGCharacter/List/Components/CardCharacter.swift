@@ -17,18 +17,7 @@ struct CardCharacter: View {
     }
     var isSelectedMode: Bool = false
     var borderColor: Color {
-        switch character.race {
-        case .dwarf:
-            .yellow
-        case .elf:
-            .green
-        case .human:
-            .blue
-        case .orc:
-            .brown
-        default:
-            .black
-        }
+        character.race.color
     }
     
     init(character: Character,

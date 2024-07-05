@@ -10,41 +10,45 @@ import SwiftUI
 struct ListView: View {
     
     @State var viewModel: CharacterListViewModel = .init()
-    @Environment(\.editMode) var editMode
     
     var body: some View {
-        ZStack {
-            imageBackground
-            groupedList
-                .padding(.top, 60)
-        }
-        .overlay(alignment: .topTrailing) {
-            Menu {
-                Button("Agrupar") {
-                    withAnimation(.easeInOut(duration: 0.2)) {
-                        viewModel.isGrouped.toggle()
-                    }
+        NavigationStack {
+            ZStack {
+                imageBackground
+                VStack {
+                    RPGTextField(text: $viewModel.searchText)
+                        .padding()
+                    groupedList
                 }
-                Button("Colapsar") {
-                    withAnimation(.easeInOut(duration: 0.2)) {
-                        viewModel.isShowing.toggle()
-                    }
-                }
-                .disabled(!viewModel.isGrouped)
-                EditButton()
-            } label: {
-                Image(systemName: "ellipsis.circle")
-                    .font(.largeTitle)
             }
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigation) {
+                    Text("Personagens")
+                        .foregroundColor(.white)
+                        .font(.largeTitle)
+                        .bold()
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .automatic, content: {
+                    if viewModel.isEditing {
+                        okButton
+                    } else {
+                        menuPicker
+                    }
+                })
+                ToolbarItem(placement: .primaryAction, content: {
+                    Button(action: {
+//                        NewCharacterView()
+                    }, label: {
+                        Image(systemName: "plus")
+                            .font(.title)
+                    })
+                })
+            }
+            .toolbarBackground(.hidden, for: .navigationBar)
         }
-        .overlay(alignment: .top) {
-            RPGTextField(text: $viewModel.searchText)
-                .padding(.horizontal,48)
-        }
-        .onChange(of: editMode?.wrappedValue, {
-            viewModel.selectedChars = []
-            self.viewModel.isEditing.toggle()
-        })
     }
     
     var groupedList: some View {
@@ -77,6 +81,40 @@ struct ListView: View {
                     .opacity(0.45)
             }
             .ignoresSafeArea()
+    }
+    
+    var menuPicker: some View {
+        Menu {
+            Button("Agrupar") {
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    viewModel.isGrouped.toggle()
+                }
+            }
+            Button("Colapsar") {
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    viewModel.isShowing.toggle()
+                }
+            }
+            .disabled(!viewModel.isGrouped)
+            Button("Edit") {
+                withAnimation {
+                    viewModel.selectedChars = []
+                    self.viewModel.isEditing.toggle()
+                }
+            }
+        } label: {
+            Image(systemName: "ellipsis.circle")
+                .font(.title)
+        }
+    }
+    
+    var okButton: some View {
+        Button("OK") {
+            withAnimation {
+                viewModel.selectedChars = []
+                self.viewModel.isEditing.toggle()
+            }
+        }.font(.title2)
     }
     
 }
