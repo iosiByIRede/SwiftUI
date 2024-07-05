@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0FA304762C37DC0000C6CC2A /* NewCharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA304752C37DC0000C6CC2A /* NewCharacterView.swift */; };
+		0FA304792C37DC8D00C6CC2A /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA304782C37DC8D00C6CC2A /* ListView.swift */; };
+		0FA3047B2C37DCA400C6CC2A /* CharacterListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA3047A2C37DCA400C6CC2A /* CharacterListViewModel.swift */; };
+		0FA3047E2C37DCC100C6CC2A /* ImageCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA3047D2C37DCC100C6CC2A /* ImageCharacter.swift */; };
+		0FA304802C37DCCE00C6CC2A /* CardCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA3047F2C37DCCE00C6CC2A /* CardCharacter.swift */; };
+		0FA304832C380BF300C6CC2A /* RPGTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA304822C380BF300C6CC2A /* RPGTextField.swift */; };
 		0FD0E8DD2C2B37C7008F566D /* RPGCharacterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD0E8DC2C2B37C7008F566D /* RPGCharacterApp.swift */; };
 		0FD0E8DF2C2B37C7008F566D /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD0E8DE2C2B37C7008F566D /* OnboardingView.swift */; };
 		0FD0E8E12C2B37C9008F566D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FD0E8E02C2B37C9008F566D /* Assets.xcassets */; };
@@ -15,6 +21,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0FA304752C37DC0000C6CC2A /* NewCharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCharacterView.swift; sourceTree = "<group>"; };
+		0FA304782C37DC8D00C6CC2A /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		0FA3047A2C37DCA400C6CC2A /* CharacterListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListViewModel.swift; sourceTree = "<group>"; };
+		0FA3047D2C37DCC100C6CC2A /* ImageCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCharacter.swift; sourceTree = "<group>"; };
+		0FA3047F2C37DCCE00C6CC2A /* CardCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCharacter.swift; sourceTree = "<group>"; };
+		0FA304822C380BF300C6CC2A /* RPGTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPGTextField.swift; sourceTree = "<group>"; };
 		0FD0E8D92C2B37C7008F566D /* RPGCharacter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RPGCharacter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FD0E8DC2C2B37C7008F566D /* RPGCharacterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPGCharacterApp.swift; sourceTree = "<group>"; };
 		0FD0E8DE2C2B37C7008F566D /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -35,6 +47,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0FA304772C37DC7900C6CC2A /* List */ = {
+			isa = PBXGroup;
+			children = (
+				0FA3047C2C37DCAB00C6CC2A /* Components */,
+				0FA304782C37DC8D00C6CC2A /* ListView.swift */,
+				0FA3047A2C37DCA400C6CC2A /* CharacterListViewModel.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		0FA3047C2C37DCAB00C6CC2A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				0FA3047D2C37DCC100C6CC2A /* ImageCharacter.swift */,
+				0FA3047F2C37DCCE00C6CC2A /* CardCharacter.swift */,
+				0FA304822C380BF300C6CC2A /* RPGTextField.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		0FD0E8D02C2B37C7008F566D = {
 			isa = PBXGroup;
 			children = (
@@ -54,12 +86,14 @@
 		0FD0E8DB2C2B37C7008F566D /* RPGCharacter */ = {
 			isa = PBXGroup;
 			children = (
+				0FA304772C37DC7900C6CC2A /* List */,
 				0FD0E8DC2C2B37C7008F566D /* RPGCharacterApp.swift */,
 				0FD0E8DE2C2B37C7008F566D /* OnboardingView.swift */,
 				DD3CF57A2C35F75B0059F8CB /* CharacterModel.swift */,
 				0FD0E8E02C2B37C9008F566D /* Assets.xcassets */,
 				0FD0E8E22C2B37C9008F566D /* RPGCharacter.entitlements */,
 				0FD0E8E32C2B37C9008F566D /* Preview Content */,
+				0FA304752C37DC0000C6CC2A /* NewCharacterView.swift */,
 			);
 			path = RPGCharacter;
 			sourceTree = "<group>";
@@ -142,9 +176,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FA304832C380BF300C6CC2A /* RPGTextField.swift in Sources */,
 				DD3CF57B2C35F75B0059F8CB /* CharacterModel.swift in Sources */,
 				0FD0E8DF2C2B37C7008F566D /* OnboardingView.swift in Sources */,
+				0FA304792C37DC8D00C6CC2A /* ListView.swift in Sources */,
 				0FD0E8DD2C2B37C7008F566D /* RPGCharacterApp.swift in Sources */,
+				0FA3047B2C37DCA400C6CC2A /* CharacterListViewModel.swift in Sources */,
+				0FA304802C37DCCE00C6CC2A /* CardCharacter.swift in Sources */,
+				0FA3047E2C37DCC100C6CC2A /* ImageCharacter.swift in Sources */,
+				0FA304762C37DC0000C6CC2A /* NewCharacterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

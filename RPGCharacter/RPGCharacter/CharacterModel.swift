@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Character {
-    var imageURL: String?
+    var image: Image?
     var name: String = "New Character"
     var rpgClass: RPGClass = .none
     var race: Race = .none
@@ -51,4 +51,21 @@ enum Race: String, CaseIterable {
     case elf
     case dwarf
     case orc
+    
+    var color: Color {
+        switch self {
+        case .dwarf:
+            .yellow
+        case .elf:
+            .green
+        case .human:
+            .blue
+        case .orc:
+            .brown
+        default:
+            .black
+        }
+    }
 }
+
+extension Character: Equatable {}
