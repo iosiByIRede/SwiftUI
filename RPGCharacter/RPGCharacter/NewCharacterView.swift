@@ -12,6 +12,9 @@ struct NewCharacterView: View {
     @State var newCharacter: Character = .init()
     @State var pickerItem: PhotosPickerItem?
     
+    @State var classSelection: String = "None"
+    @State var raceSelection: String = "None"
+    
     var body: some View {
         ZStack {
             
@@ -22,18 +25,17 @@ struct NewCharacterView: View {
                 characterImage
                 
                 Form {
-                    
-                    characterNameForm
-                    
-                    characterClassForm
-                    
-                    characterRaceForm
-                    
-                    characterDescriptionForm
-
+                    Group {
+                        characterNameForm
+                        
+                        characterClassForm
+                        
+                        characterRaceForm
+                        
+                        characterDescriptionForm
+                    }
+                        .listRowBackground(Color.clear)
                 }
-                .formStyle(.automatic)
-                .padding(.horizontal, 40)
                 .scrollContentBackground(.hidden)
                 .foregroundStyle(.white)
                 .fontWeight(.bold)
@@ -85,65 +87,33 @@ struct NewCharacterView: View {
     }
     
     var characterNameForm: some View {
-        Section {
-            TextField(text: $newCharacter.name) {
-                Text("Character Name")
-            }
-            .foregroundStyle(.black)
-            .fontWeight(.regular)
-        } header: {
-            Text("Character Name:")
-        }
+        
+        RPGTextField(title: "CHARACTER NAME:", text: $newCharacter.name)
     }
     
     var characterClassForm: some View {
-        Section {
-            Picker(selection: $newCharacter.rpgClass) {
-                ForEach(RPGClass.allCases, id: \.self) {
-                    Text($0.rawValue)
-                }
-            } label: {
-                Text(newCharacter.rpgClass.rawValue)
-                    .foregroundStyle(.black)
-                    .fontWeight(.regular)
-            }
-
-        } header: {
-            Text("Character Class:")
-        }
+        
+        RPGPicker(title: "CHARACTER CLASS",
+                  selection: $classSelection,
+                  options: RPGClass.allCases.map({$0.rawValue.capitalized}))
     }
     
     var characterRaceForm: some View {
-        Section {
-            Picker(selection: $newCharacter.race) {
-                ForEach(Race.allCases, id: \.self) {
-                    Text($0.rawValue)
-                }
-            } label: {
-                Text(newCharacter.race.rawValue)
-                    .foregroundStyle(.black)
-                    .fontWeight(.regular)
-            }
-
-        } header: {
-            Text("Character Race:")
-        }
+        
+        RPGPicker(title: "CHARACTER RACE",
+                  selection: $raceSelection,
+                  options: Race.allCases.map({$0.rawValue.capitalized}))
     }
     
     var characterDescriptionForm: some View {
-        Section {
-            TextField(text: $newCharacter.description, axis: .vertical) {
-                Text("Character Description")
-            }
-            .foregroundStyle(.black)
-            .fontWeight(.regular)
-            .lineLimit(5...10)
-        } header: {
-            Text("Description")
-        }
+        
+        RPGTextField(title: "DESCRIPTION",
+                     text: $newCharacter.description,
+                     isMultiline: true)
     }
     
     var completionButton: some View {
+        
         Button(action: {createCharacter(character: newCharacter)}) {
             RoundedRectangle(cornerRadius: 20)
                 .foregroundStyle(checkCharacterData(character: newCharacter) ? .blue : .gray)
@@ -160,6 +130,7 @@ struct NewCharacterView: View {
     }
     
     @ViewBuilder func getCharacterImage(character: Character) -> some View {
+        
         if let image =  character.image {
             image
                 .resizable()
@@ -176,6 +147,7 @@ struct NewCharacterView: View {
     }
     
     func checkCharacterData(character: Character) -> Bool {
+        
         if (character.race == .none || character.rpgClass == .none) {
             return false
         }
@@ -183,6 +155,12 @@ struct NewCharacterView: View {
     }
     
     func createCharacter(character: Character) {
+        let newCharacterClass: RPGClass = RPGClass(rawValue: classSelection.lowercased()) ?? .none
+        
+        let newCharacterRace: Race = Race(rawValue: raceSelection.lowercased()) ?? .none
+        
+        newCharacter.rpgClass = newCharacterClass
+        newCharacter.race = newCharacterRace
         
     }
 }
