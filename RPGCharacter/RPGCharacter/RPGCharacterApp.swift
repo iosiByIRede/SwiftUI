@@ -9,9 +9,16 @@ import SwiftUI
 
 @main
 struct RPGCharacterApp: App {
+    
+    @AppStorage("didFirstSession") var didFirstSession: Bool = false
+    
     var body: some Scene {
         WindowGroup {
-            NewCharacterView()
+            if didFirstSession {
+                ListView()
+            } else {
+                OnboardingView()
+            }
         }
     }
 }

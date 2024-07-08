@@ -51,4 +51,21 @@ enum Race: String, CaseIterable {
     case elf
     case dwarf
     case orc
+    
+    var color: Color {
+        switch self {
+        case .dwarf:
+            .yellow
+        case .elf:
+            .green
+        case .human:
+            .blue
+        case .orc:
+            .brown
+        default:
+            .black
+        }
+    }
 }
+
+extension Character: Equatable {}

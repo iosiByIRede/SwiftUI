@@ -1,8 +1,8 @@
 //
-//  AddingView.swift
+//  NewCharacterView.swift
 //  RPGCharacter
 //
-//  Created by Ian Pacini on 02/07/24.
+//  Created by Gilberto Magno on 05/07/24.
 //
 
 import SwiftUI
