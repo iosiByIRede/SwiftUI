@@ -130,7 +130,6 @@ struct ListView: View {
             }
             
         } label: {
-            
             Image(systemName: "ellipsis.circle")
                 .font(.title2)
                 .foregroundStyle(.white)
