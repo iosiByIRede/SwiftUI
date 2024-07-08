@@ -17,6 +17,39 @@ class CharacterListViewModel {
     
     var selectedChars: [Character] = []
     
+    var getAllRaces: [String] {
+        self.isGrouped ? self.allRaces : ["All in one"]
+    }
+    
+    
+    func getAllCharacters(_ race: String) -> [Character] {
+        if isGrouped {
+            return charactersByRace[race] ?? []
+        } else {
+            return charactersFiltered
+        }
+    }
+    
+    func addCharacter() {
+        withAnimation {
+            characters.insert(returnRandomChar(), at: 0)
+        }
+    }
+    
+    func deleteCharacter(in index: IndexSet) {
+        characters.remove(atOffsets: index)
+    }
+    
+    func deleteSelectedChars() {
+        withAnimation {
+            characters.removeAll { character in
+                selectedChars.contains(character)
+            }
+        }
+    }
+    
+    private var allRaces: [String] {Array(charactersByRace.keys.sorted())}
+    
     var charactersFiltered: [Character] {
         characters.filter {
             if self.searchText != "" {
@@ -27,7 +60,7 @@ class CharacterListViewModel {
         }
     }
     
-    var charactersByRace: [String: [Character]] {
+    private var charactersByRace: [String: [Character]] {
         
         var characterByRace: [String: [Character]] = [:]
         
@@ -47,22 +80,6 @@ class CharacterListViewModel {
         
         return characterByRace
     }
-    
-    
-    func getAllCharacters(_ race: String) -> [Character] {
-        if isGrouped {
-            return charactersByRace[race] ?? []
-        } else {
-            return charactersFiltered
-        }
-    }
-    
-    var allRaces: [String] {Array(charactersByRace.keys.sorted())}
-    
-    
-    func addCharacter() {
-        characters.append(returnRandomChar())
-    }
 
     private var characters: [Character] = [
         Character( imageURL: "rpg", name: "Aorus Elite", rpgClass: .mage, race: .human ),
@@ -79,7 +96,10 @@ class CharacterListViewModel {
         Character( name: "Sir lick my bulls", rpgClass: .novice, race: .dwarf),
         Character( name: "World destroyer with Love", rpgClass: .swordsman, race: .orc),
         Character( name: "Something Between Human and Table", rpgClass: .blacksmith, race: .orc),
-        Character( name: "must hated love", rpgClass: .blacksmith, race: .orc)
+        Character( name: "must hated love", rpgClass: .blacksmith, race: .orc),
+        Character( name: "Markov Nikov", rpgClass: .mage, race: .human),
+        Character( name: "Bebezã0", rpgClass: .novice, race: .orc),
+        Character( name: "Johnson Carl", rpgClass: .mage, race: .orc)
         
     ]
     
@@ -158,6 +178,13 @@ class CharacterListViewModel {
             "Lancer",
             "Golf",
             "Mica",
+            "GOT the Goat",
+            "Marromeno",
+            "High Level",
+            "Contexto",
+            "Pixels",
+            "Problem Together",
+            "Top Series"
         ]
         return Character( name: names.randomElement() ?? "", rpgClass: classes.randomElement() ?? .archer, race: races.randomElement() ?? .dwarf)
     }

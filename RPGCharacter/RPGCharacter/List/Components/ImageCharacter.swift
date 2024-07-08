@@ -15,17 +15,10 @@ struct ImageCharacter: View {
     @ViewBuilder var imgChar: some View {
         if let imageUrl = char.imageURL {
             Image(imageUrl)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 100, height: 100)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .rpgImageStyle()
         } else {
             Image(systemName: char.rpgClass.defaultImage)
-                .resizable()
-                .scaledToFit()
-                .padding(10)
-                .foregroundStyle(char.race.color)
-                .frame(width: 75, height: 75)
+                .rpgImageStyleDefault(color: char.race.color)
         }
     }
     
@@ -36,7 +29,7 @@ struct ImageCharacter: View {
             imgChar
             
         }
-        .frame(width: 100, height: 100)
+        .frame(width: 80, height: 80)
         .overlay(
             RoundedRectangle(cornerRadius: 10)
                 .stroke(char.race.color, lineWidth: 2)
@@ -51,13 +44,13 @@ struct ImageCharacter: View {
     var selectCircle: some View {
         Circle()
             .fill(Color("rpgGrayedBlue"))
-            .frame(width: 30, height: 30)
+            .frame(width: 20, height: 20)
             .padding(-8)
             .overlay {
-                if self.isSelected {
+                if isSelected {
                     Image(systemName: "checkmark.circle.fill")
                         .foregroundStyle(.green)
-                        .font(.title)
+                        .font(.title2)
                 }
             }
     }
@@ -65,6 +58,7 @@ struct ImageCharacter: View {
 
 #Preview {
     ZStack {
+        ImageBackgroundView()
         ImageCharacter(
             char: Character(
                 imageURL: "rpg",
@@ -76,9 +70,5 @@ struct ImageCharacter: View {
             isSelectMode: true,
             isSelected: true
         )
-    }
-    .padding()
-    .background {
-        Color.blue
     }
 }

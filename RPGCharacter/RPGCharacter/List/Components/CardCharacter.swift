@@ -21,7 +21,7 @@ struct CardCharacter: View {
     }
     
     var body: some View {
-        HStack(alignment: .center) {
+        HStack {
             ImageCharacter(
                 char: character,
                 isSelectMode: isSelectedMode,
@@ -30,7 +30,7 @@ struct CardCharacter: View {
             
             VStack(alignment: .leading) {
                 Text(character.name.capitalized)
-                    .font(.title)
+                    .font(.title2)
                 HStack {
                     Text(character.race.rawValue.capitalized)
                     Text(character.rpgClass.rawValue.capitalized)
@@ -39,7 +39,6 @@ struct CardCharacter: View {
             .foregroundStyle(.white)
             .bold()
             .padding(.leading)
-            Spacer()
         }
         .onTapGesture {
             tapCard()
@@ -60,7 +59,7 @@ struct CardCharacter: View {
 }
 
 #Preview {
-    ZStack{
+    ZStack {
         ImageBackgroundView()
         CardCharacter(
             character: Character(
