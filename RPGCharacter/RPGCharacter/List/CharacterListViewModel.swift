@@ -36,15 +36,15 @@ class CharacterListViewModel {
         }
     }
     
-    func deleteCharacter(char: IndexSet, race: String) {
+    func deleteCharacter(indexSet: IndexSet, race: String) {
         let characterList = getAllCharacters(race)
-        var teste3: Int = 0
-        for index in char {
-            teste3 = index
+        var indexOfCharacter: Int = 0
+        for index in indexSet {
+            indexOfCharacter = index
         }
         
-        let characterToRemove = characterList[teste3]
-        print( "Algo \(characterToRemove)")
+        let characterToRemove = characterList[indexOfCharacter]
+
         withAnimation {
             characters.removeAll { character in
                 character == characterToRemove
