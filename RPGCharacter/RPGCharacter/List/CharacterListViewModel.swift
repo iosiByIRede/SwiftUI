@@ -12,6 +12,35 @@ class CharacterListViewModel {
     
     var isGrouped: Bool = false
     
+    var getAllRaces: [String] {
+        self.isGrouped ? self.allRaces : [""]
+    }
+    
+    private var allRaces: [String] {Array(charactersByRace.keys.sorted())}
+    
+    func getAllCharacters(_ race: String) -> [Character] {
+        if isGrouped {
+            return charactersByRace[race] ?? []
+        } else {
+            return characters
+        }
+    }
+
+    
+    private var charactersByRace: [String: [Character]] {
+        var characterByRace: [String: [Character]] = [:]
+        characters.forEach{ char in
+            // Caso já tenha essa chave no Array basta adicionar o Character
+            if(characterByRace.keys.contains(char.race.rawValue)){
+                characterByRace[char.race.rawValue]?.append(char)
+                // Caso não tenha, cria essa chave com o novo char
+            } else {
+                characterByRace[char.race.rawValue] = [char]
+            }
+        }
+        return characterByRace
+    }
+    
     var characters: [Character] = [
         Character(name: "Ragnar", rpgClass: .archer, race: .dwarf),
         Character(name: "Ryuk", rpgClass: .blacksmith, race: .elf),
