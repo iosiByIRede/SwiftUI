@@ -13,6 +13,11 @@ struct ListView: View {
     var body: some View {
         ZStack {
             ImageBackgroundView()
+            List {
+                CardCharacter(character: Character(name: "first Character", rpgClass: .archer, race: .dwarf), selectedCharacter: .constant([]))
+                CardCharacter(character: Character(name: "Second Character", rpgClass: .blacksmith, race: .elf), selectedCharacter: .constant([]))
+                CardCharacter(character: Character(name: "third Character", rpgClass: .mage, race: .human), selectedCharacter: .constant([]))
+            }
         }
     }
 }
