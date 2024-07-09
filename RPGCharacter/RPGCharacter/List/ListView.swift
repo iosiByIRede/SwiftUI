@@ -14,9 +14,20 @@ struct ListView: View {
         NavigationStack {
             ZStack {
                 ImageBackgroundView()
-                List(viewModel.characters) { character in
-                    CardCharacter(character: character, selectedCharacter: .constant([]))
-                        .listRowBackground(Color.clear)
+                List {
+                    ForEach(viewModel.getAllRaces, id: \.self) { race in
+                        Section {
+                            ForEach(viewModel.getAllCharacters(race), id: \.name){
+                                CardCharacter(character: $0, selectedCharacter: .constant([]))
+                                    .listRowBackground(Color.clear)
+                            }
+                        } header: {
+                            if viewModel.isGrouped {
+                                Text(race).foregroundColor(.white)
+                                    .font(.title)
+                            }
+                        }
+                    }
                 }
                 .scrollContentBackground(.hidden)
             }
