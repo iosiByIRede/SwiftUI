@@ -13,12 +13,8 @@ struct ListView: View {
     var body: some View {
         ZStack {
             ImageBackgroundView()
-            List {
-                CardCharacter(character: Character(name: "first Character", rpgClass: .archer, race: .dwarf), selectedCharacter: .constant([]))
-                    .listRowBackground(Color.clear)
-                CardCharacter(character: Character(name: "Second Character", rpgClass: .blacksmith, race: .elf), selectedCharacter: .constant([]))
-                    .listRowBackground(Color.clear)
-                CardCharacter(character: Character(name: "third Character", rpgClass: .mage, race: .human), selectedCharacter: .constant([]))
+            List(viewModel.characters) { character in
+                CardCharacter(character: character, selectedCharacter: .constant([]))
                     .listRowBackground(Color.clear)
             }
             .scrollContentBackground(.hidden)
