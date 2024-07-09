@@ -61,9 +61,9 @@ struct ListView: View {
                             .foregroundStyle(.white)
 
                     }
-
                 }
             }
+            .toolbarBackground(.hidden, for: .navigationBar)
         }
     }
 }
