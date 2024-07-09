@@ -11,7 +11,9 @@ struct ListView: View {
     @State var viewModel: CharacterListViewModel = CharacterListViewModel()
     
     var body: some View {
-        EmptyView()
+        ZStack {
+            ImageBackgroundView()
+        }
     }
 }
 
