@@ -27,6 +27,20 @@ struct ListView: View {
                         .font(.largeTitle)
                         .bold()
                 }
+                
+                ToolbarItem(placement: .primaryAction) {
+                    Menu {
+                        Button("Agrupar") {
+                            // mudar o estado para agrupado
+                        }
+                    } label: {
+                        Image(systemName: "ellipsis.circle")
+                            .font(.title2)
+                            .foregroundStyle(.white)
+
+                    }
+
+                }
             }
         }
     }
