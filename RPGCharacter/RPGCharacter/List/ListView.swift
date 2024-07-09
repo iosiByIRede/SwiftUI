@@ -11,6 +11,8 @@ struct ListView: View {
     
     @State var viewModel: CharacterListViewModel = .init()
     
+    @State var isSheetDisplayed: Bool = false
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -59,6 +61,11 @@ struct ListView: View {
                         CardCharacter(character: char,
                                       selectedCharacter: $viewModel.selectedChars,
                                       isSelectedMode: viewModel.isEditing)
+                        .onTapGesture(action: {
+                            viewModel.selectedChar = char
+                            isSheetDisplayed.toggle()
+                        })
+
                         .listRowBackground(Color.clear)
                     }
                 } header: {
@@ -68,6 +75,9 @@ struct ListView: View {
                             .bold()
                     }
                 }
+                .sheet(isPresented: $isSheetDisplayed, content: {
+                    CharacterView(character: viewModel.selectedChar)
+                })
             }
         }
         .scrollContentBackground(.hidden)

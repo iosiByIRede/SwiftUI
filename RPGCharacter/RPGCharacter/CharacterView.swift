@@ -21,7 +21,7 @@ struct CharacterView: View {
                     characterImage
                     
                     characterHeader
-                        .offset(y:126)
+                        .padding(.top, 249)
                 }
 
                 characterDescription

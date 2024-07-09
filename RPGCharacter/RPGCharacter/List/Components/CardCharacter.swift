@@ -22,10 +22,13 @@ struct CardCharacter: View {
     
     init(character: Character,
          selectedCharacter: Binding<[Character]> = .constant([]),
-         isSelectedMode: Bool = true) {
+         isSelectedMode: Bool = true,
+         onTapGesture: (() -> Void)? = nil
+    ) {
         self.character = character
         self._selectedCharacter = selectedCharacter
         self.isSelectedMode = isSelectedMode
+        self.onTapGesture = onTapGesture
     }
     
     var body: some View {
@@ -48,9 +51,25 @@ struct CardCharacter: View {
             .padding(.leading)
             Spacer()
         }
-        .onTapGesture {
-            tapCard()
-        }
+        .gesture(
+            TapGesture()
+                .onEnded({
+                    tapCard()
+                })
+                .simultaneously(with:
+                               TapGesture()
+                    .onEnded(onTapGesture ?? {})
+                               )
+        )
+//        .onTapGesture {
+//            tapCard()
+//        }
+    }
+    
+    var onTapGesture: (() -> Void)?
+    
+    func onTapGesture(action: @escaping () -> Void) -> some View {
+        CardCharacter(character: self.character, selectedCharacter: self.$selectedCharacter, isSelectedMode: self.isSelectedMode, onTapGesture: action)
     }
     
     func tapCard() {

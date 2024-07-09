@@ -10,6 +10,8 @@ import SwiftUI
 @Observable
 class CharacterListViewModel {
     
+    var selectedChar: Character = .init()
+    
     var allChar: [Character] = {
         (0...30).map { _ in .init().randomize() }
     }()
