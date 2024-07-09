@@ -11,6 +11,7 @@ import SwiftUI
 class CharacterListViewModel {
     
     var isGrouped: Bool = false
+    var isShowingGroup: Bool = true
     
     var getAllRaces: [String] {
         self.isGrouped ? self.allRaces : [""]

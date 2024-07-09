@@ -16,7 +16,7 @@ struct ListView: View {
                 ImageBackgroundView()
                 List {
                     ForEach(viewModel.getAllRaces, id: \.self) { race in
-                        Section {
+                        Section(isExpanded: $viewModel.isShowingGroup) {
                             ForEach(viewModel.getAllCharacters(race), id: \.name){
                                 CardCharacter(character: $0, selectedCharacter: .constant([]))
                                     .listRowBackground(Color.clear)
@@ -44,6 +44,14 @@ struct ListView: View {
                         Button(viewModel.isGrouped ? "Desagrupar" : "Agrupar") {
                             viewModel.isGrouped.toggle()
                         }
+                        
+                        Button(viewModel.isShowingGroup ? "Colapsar" : "Expandir") {
+                            withAnimation {
+                                viewModel.isShowingGroup.toggle()
+                            }
+                        }
+                        .disabled(!viewModel.isGrouped)
+
                     } label: {
                         Image(systemName: "ellipsis.circle")
                             .font(.title2)
