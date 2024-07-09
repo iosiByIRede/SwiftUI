@@ -10,6 +10,8 @@ import SwiftUI
 @Observable
 class CharacterListViewModel {
     
+    var isGrouped: Bool = false
+    
     var characters: [Character] = [
         Character(name: "Ragnar", rpgClass: .archer, race: .dwarf),
         Character(name: "Ryuk", rpgClass: .blacksmith, race: .elf),

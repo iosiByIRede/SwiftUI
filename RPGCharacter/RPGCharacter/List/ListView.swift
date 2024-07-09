@@ -30,8 +30,8 @@ struct ListView: View {
                 
                 ToolbarItem(placement: .primaryAction) {
                     Menu {
-                        Button("Agrupar") {
-                            // mudar o estado para agrupado
+                        Button(viewModel.isGrouped ? "Desagrupar" : "Agrupar") {
+                            viewModel.isGrouped.toggle()
                         }
                     } label: {
                         Image(systemName: "ellipsis.circle")
