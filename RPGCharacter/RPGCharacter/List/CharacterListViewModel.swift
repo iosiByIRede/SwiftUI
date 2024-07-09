@@ -9,118 +9,17 @@ import SwiftUI
 
 @Observable
 class CharacterListViewModel {
-    var searchText: String = ""
     
-    var isEditing: Bool = false
-    var isGrouped: Bool = false
-    var isShowingGroup: Bool = true
-    
-    var selectedChars: [Character] = []
-    
-    var getAllRaces: [String] {
-        self.isGrouped ? self.allRaces : ["All in one"]
-    }
-    
-    
-    func getAllCharacters(_ race: String) -> [Character] {
-        if isGrouped {
-            return charactersByRace[race] ?? []
-        } else {
-            return charactersFiltered
-        }
-    }
-    
-    func addCharacter() {
-        withAnimation {
-            characters.insert(returnRandomChar(), at: 0)
-        }
-    }
-    
-    func deleteCharacter(char: IndexSet, race: String) {
-        let characterList = getAllCharacters(race)
-        var teste3: Int = 0
-        for index in char {
-            teste3 = index
-        }
-        
-        let characterToRemove = characterList[teste3]
-        print( "Algo \(characterToRemove)")
-        withAnimation {
-            characters.removeAll { character in
-                character == characterToRemove
-            }
-        }
-    }
-    
-    func deleteSelectedChars() {
-        withAnimation {
-            characters.removeAll { character in
-                selectedChars.contains(character)
-            }
-        }
-    }
-    
-    
-    var charactersFiltered: [Character] {
-        characters.filter {
-            if self.searchText != "" {
-                return $0.name.localizedCaseInsensitiveContains(self.searchText)
-            } else {
-                return true
-            }
-        }
-    }
-    
-    func moveCharacter(fromOffsets indice: IndexSet, toOffset newOffset: Int) {
-        characters.move(fromOffsets: indice, toOffset: newOffset)
-    }
-    
-    private var allRaces: [String] {Array(charactersByRace.keys.sorted())}
-    
-    private var charactersByRace: [String: [Character]] {
-        
-        var characterByRace: [String: [Character]] = [:]
-        
-        charactersFiltered.forEach{ char in
-            // Caso já tenha essa chave no Array basta adicionar o Character
-            if(characterByRace.keys.contains(char.race.rawValue)){
-                
-                characterByRace[char.race.rawValue]?.append(char)
-                // Caso não tenha, cria essa chave com o novo char
-            } else {
-                
-                characterByRace[char.race.rawValue] = [char]
-                
-            }
-            
-        }
-        
-        return characterByRace
-    }
-
     private var characters: [Character] = [
-        Character( imageURL: "rpg", name: "Aorus Elite", rpgClass: .mage, race: .human ),
-        Character( name: "Frieren", rpgClass: .mage, race: .elf ),
-        Character( name: "Marquinhos", rpgClass: .swordsman, race: .dwarf ),
-        Character( name: "thraee", rpgClass: .mage, race: .orc ),
-        Character( name: "Rubens", rpgClass: .merchant, race: .human ),
-        Character( name: "Ian", rpgClass: .novice, race: .orc ),
-        Character( name: "Caio", rpgClass: .archer, race: .elf ),
-        Character( name: "Magno", rpgClass: .mage, race: .human ),
-        Character( name: "Pedro Design", rpgClass: .novice, race: .elf ),
-        Character( name: "Particípio", rpgClass: .merchant, race: .dwarf),
-        Character( name: "Sigma", rpgClass: .mage, race: .elf),
-        Character( name: "Sir lick my bulls", rpgClass: .novice, race: .dwarf),
-        Character( name: "World destroyer with Love", rpgClass: .swordsman, race: .orc),
-        Character( name: "Something Between Human and Table", rpgClass: .blacksmith, race: .orc),
-        Character( name: "must hated love", rpgClass: .blacksmith, race: .orc),
-        Character( name: "Markov Nikov", rpgClass: .mage, race: .human),
-        Character( name: "Bebezã0", rpgClass: .novice, race: .orc),
-        Character( name: "Johnson Carl", rpgClass: .mage, race: .orc)
-        
+        Character(name: "Ragnar", rpgClass: .archer, race: .dwarf),
+        Character(name: "Ryuk", rpgClass: .blacksmith, race: .elf),
+        Character(name: "Shori", rpgClass: .mage, race: .human),
+        Character(name: "Witz", rpgClass: .merchant, race: .orc),
+        Character(name: "Zakre", rpgClass: .swordsman, race: .dwarf),
     ]
-    
+
     private func returnRandomChar() -> Character {
+
         let classes: [RPGClass] = [
             .archer,
             .blacksmith,
@@ -136,105 +35,30 @@ class CharacterListViewModel {
             .orc
         ]
         let names: [String] = [
-            "Lindenberg",
-            "Luzes",
-            "Amanda CrossFox",
-            "Ford Ka Rebeixado Turbinado",
-            "Marea em ótimo estado (CE)",
-            "Fernando Gol Quadrado",
-            "BMW 321i",
-            "Ricardson",
-            "Wesley Opalão",
-            "HB20buscar",
-            "Ubireudo",
-            "Utebo",
-            "Matus",
-            "Crililo",
-            "Renoult Kiwi",
-            "Fiat Mobile",
-            "John", 
-            "Mary",
-            "Ford Mustarda",
-            "Chevrolet Camarão",
-            "Giggles McSnort", 
-            "Laughy McLaughface",
-            "Apule", 
-            "Bardock",
-            "Videl",
-            "Puar",
-            "Mazda RX-7",
-            "Toyota AE86",
-            "Snicker Doodle",
-            "Wheelo", 
-            "Raspberry",
-            "Toriyama",
-            "Honda NSX",
-            "Nissan Skyline GT-R",
-            "Fizz Buzz",
-            "Oats", 
-            "Turles",
-            "Launch",
-            "Bulma's Mom",
-            "Ford Model T",
-            "Dodge Charger",
-            "Gogeta",
-            "Carrot Top", 
-            "Breeza",
-            "Dr. Briefs",
-            "Acer",
-            "Saibaiman",
-            "Spopovich",
-            "Volkswagen Beetle",
-            "Pontiac Firebird", 
-            "Laughterina",
-            "Zorn",
-            "Jewel",
-            "Paprika",
-            "Gabriel o Pescador",
-            "Liberatus",
-            "Lancer",
-            "Golf",
-            "Mica",
-            "GOT the Goat",
-            "Marromeno",
-            "High Level",
-            "Contexto",
-            "Pixels",
-            "Problem Together",
-            "Top Series",
-            "Fernanda Fusca", 
-            "João Opala",
-            "Maria Brasília",
-            "Pedro Kombi",
-            "Ana Maverick",
-            "Lucas Chevette",
-            "Carla Corcel",
-            "Bruno Variant",
-            "Larissa Belina",
-            "Marcos Gordini",
-            "Paula TL",
-            "Ricardo SP2",
-            "Julia Passat",
-            "Fernando Puma",
-            "Sara Karmann Ghia",
-            "Eduardo Dodge Dart",
-            "Carolina Miura",
-            "Gabriel Alfa Romeo",
-            "Vanessa Willys",
-            "Rafael Simca Chambord",
-            "Isabela Itamaraty",
-            "Leonardo Rural Willys",
-            "Marina Aero Willys",
-            "Thiago JK",
-            "Aline MP Lafer",
-            "Felipe Santa Matilde",
-            "Juliana F100",
-            "Rogério Galaxy",
-            "Patrícia Fuscão", 
-            "Carlos Maverick GT",
-            "Bianca 147",
-            "Alex Monza",
-            "Renata Diplomata"
+            "Aldric", "Branwen", "Cedric", "Darian", "Elowen", "Fendrel", "Gwyneth", "Haldor",
+            "Isolde", "Jareth", "Kael", "Liora", "Merrick", "Nyssa", "Orin", "Perrin", "Quinlan",
+            "Rowena", "Sorin", "Thalia", "Ulric", "Vesper", "Wren", "Xander", "Yara", "Zephyr",
+            "Aeliana", "Brom", "Calyx", "Drystan", "Eira", "Finnian", "Gareth", "Hesper", "Ivor",
+            "Jocasta", "Kendra", "Leoric", "Meliora", "Nerissa", "Oberon", "Phelan", "Quorra",
+            "Roderick", "Sable", "Taliesin", "Ursula", "Viggo", "Willow", "Xanthos", "Yelena", "Zarek",
+            "Alaric", "Briar", "Cassandra", "Doran", "Elysia", "Falkor", "Galen", "Helena", "Ishmael",
+            "Julian", "Kaida", "Lysandra", "Morgana", "Nyle", "Ophelia", "Pax", "Quillon", "Reyna",
+            "Sable", "Torian", "Ulrich", "Varian", "Wulfric", "Xenia", "Ysolde", "Zan",
+            "Aisling", "Balinor", "Caelum", "Draven", "Elara", "Ferox", "Gavriel", "Harkin", "Ilara",
+            "Jorah", "Karis", "Lothar", "Maelis", "Nerida", "Orian", "Persephone", "Quintus",
+            "Ravenna", "Selene", "Thorin", "Uriel", "Vara", "Wynter", "Xara", "Yorick", "Zara",
+            "Aric", "Bryn", "Corwin", "Dashiell", "Evadne", "Faelan", "Giselle", "Horus", "Islay",
+            "Jax", "Korrin", "Luna", "Mara", "Nashira", "Odin", "Phineas", "Quincy", "Rohan",
+            "Soren", "Tamsin", "Ulysses", "Vale", "Wynn", "Xanthe", "Ysabella", "Zaden",
+            "Aldwin", "Bellamy", "Catriona", "Dagon", "Elara", "Faustus", "Garrett", "Haldir", "Ivanna",
+            "Jareth", "Kyra", "Lirael", "Maddox", "Nyx", "Orelia", "Phoenix", "Quinn", "Rhiannon",
+            "Sylas", "Talon", "Ulfric", "Valeria", "Wyn", "Xenia", "Yara", "Zane",
+            "Arianna", "Bastian", "Cyrus", "Dracaena", "Eowyn", "Fenris", "Gideon", "Hespera", "Isolde",
+            "Jasper", "Kaelin", "Lyra", "Maeve", "Niamh", "Orin", "Peregrine", "Quintessa", "Ronan",
+            "Seraphina", "Taran", "Ulrika", "Valen", "Willa", "Xanther", "Ysabel", "Zarek",
+            "Auron", "Blythe", "Cassian", "Damaris", "Elric", "Finn", "Gwen", "Halvard", "Iskra",
+            "Jareth", "Kiera", "Leif", "Magnus", "Nyssa", "Oberyn", "Patrin", "Quorra", "Ryker",
+            "Selene", "Thorne", "Ulric", "Vespera", "Willow", "Xander", "Yvonne", "Zander"
         ]
         return Character( name: names.randomElement() ?? "", rpgClass: classes.randomElement() ?? .archer, race: races.randomElement() ?? .dwarf)
     }

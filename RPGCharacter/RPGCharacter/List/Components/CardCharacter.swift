@@ -61,7 +61,7 @@ struct CardCharacter: View {
 #Preview {
     ZStack {
         ImageBackgroundView()
-        Text("kkkkk")
+        Text("")
             .sheet(isPresented: .constant(true), content: {
                 CardCharacter(
                     character: Character(
