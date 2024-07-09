@@ -10,7 +10,7 @@ import SwiftUI
 @Observable
 class CharacterListViewModel {
     
-    private var characters: [Character] = [
+    var characters: [Character] = [
         Character(name: "Ragnar", rpgClass: .archer, race: .dwarf),
         Character(name: "Ryuk", rpgClass: .blacksmith, race: .elf),
         Character(name: "Shori", rpgClass: .mage, race: .human),
