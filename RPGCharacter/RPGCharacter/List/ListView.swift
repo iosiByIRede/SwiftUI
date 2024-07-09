@@ -11,13 +11,23 @@ struct ListView: View {
     @State var viewModel: CharacterListViewModel = CharacterListViewModel()
     
     var body: some View {
-        ZStack {
-            ImageBackgroundView()
-            List(viewModel.characters) { character in
-                CardCharacter(character: character, selectedCharacter: .constant([]))
-                    .listRowBackground(Color.clear)
+        NavigationStack {
+            ZStack {
+                ImageBackgroundView()
+                List(viewModel.characters) { character in
+                    CardCharacter(character: character, selectedCharacter: .constant([]))
+                        .listRowBackground(Color.clear)
+                }
+                .scrollContentBackground(.hidden)
             }
-            .scrollContentBackground(.hidden)
+            .toolbar {
+                ToolbarItem(placement: .navigation) {
+                    Text("Personagens")
+                        .foregroundColor(.white)
+                        .font(.largeTitle)
+                        .bold()
+                }
+            }
         }
     }
 }
