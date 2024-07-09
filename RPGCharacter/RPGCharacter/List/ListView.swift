@@ -42,6 +42,9 @@ struct ListView: View {
                 ToolbarItem(placement: .primaryAction) {
                     Menu {
                         Button(viewModel.isGrouped ? "Desagrupar" : "Agrupar") {
+                            if viewModel.isGrouped {
+                                viewModel.isShowingGroup = true
+                            }
                             viewModel.isGrouped.toggle()
                         }
                         
