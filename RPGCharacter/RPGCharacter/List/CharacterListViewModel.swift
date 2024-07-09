@@ -36,8 +36,20 @@ class CharacterListViewModel {
         }
     }
     
-    func deleteCharacter(in index: IndexSet) {
-        characters.remove(atOffsets: index)
+    func deleteCharacter(char: IndexSet, race: String) {
+        let characterList = getAllCharacters(race)
+        var teste3: Int = 0
+        for index in char {
+            teste3 = index
+        }
+        
+        let characterToRemove = characterList[teste3]
+        print( "Algo \(characterToRemove)")
+        withAnimation {
+            characters.removeAll { character in
+                character == characterToRemove
+            }
+        }
     }
     
     func deleteSelectedChars() {
@@ -48,7 +60,6 @@ class CharacterListViewModel {
         }
     }
     
-    private var allRaces: [String] {Array(charactersByRace.keys.sorted())}
     
     var charactersFiltered: [Character] {
         characters.filter {
@@ -59,6 +70,12 @@ class CharacterListViewModel {
             }
         }
     }
+    
+    func moveCharacter(fromOffsets indice: IndexSet, toOffset newOffset: Int) {
+        characters.move(fromOffsets: indice, toOffset: newOffset)
+    }
+    
+    private var allRaces: [String] {Array(charactersByRace.keys.sorted())}
     
     private var charactersByRace: [String: [Character]] {
         

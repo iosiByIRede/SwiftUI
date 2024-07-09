@@ -76,10 +76,12 @@ struct ListView: View {
                         .listRowBackground(Color.clear)
                         
                     }
-                    .onDelete(perform: { indexSet in
-                        viewModel.deleteCharacter(in: indexSet)
-                    })
-                    
+                    .onDelete { indexSet in
+                        viewModel.deleteCharacter(char: indexSet, race: race)
+                    }
+                    .onMoveConditional (disabled: viewModel.isGrouped) { index, int in
+                        viewModel.moveCharacter(fromOffsets: index, toOffset: int)
+                    }
                 } header: {
                     if viewModel.isGrouped {
                         Text(race).foregroundColor(.white)
@@ -138,7 +140,7 @@ struct ListView: View {
 }
 
 #Preview {
-    NavigationStack{
+    NavigationStack {
         ListView()
     }
 }

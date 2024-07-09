@@ -61,14 +61,25 @@ struct CardCharacter: View {
 #Preview {
     ZStack {
         ImageBackgroundView()
-        CardCharacter(
-            character: Character(
-                imageURL: "rpg",
-                name: "name",
-                rpgClass: .archer,
-                race: .dwarf
-            ),
-            selectedCharacter: .constant([])
-        )
+        Text("kkkkk")
+            .sheet(isPresented: .constant(true), content: {
+                CardCharacter(
+                    character: Character(
+                        imageURL: "rpg",
+                        name: "name",
+                        rpgClass: .archer,
+                        race: .dwarf
+                    ),
+                    selectedCharacter: .constant([])
+                ).presentationDetents([
+                    .custom(CustomDetent.self)
+                ])
+            })
+    }
+}
+
+struct CustomDetent: CustomPresentationDetent {
+    static func height(in context: Context) -> CGFloat? {
+        return context.maxDetentValue - 1
     }
 }
