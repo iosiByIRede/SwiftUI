@@ -18,7 +18,7 @@ struct ListView: View {
                     ForEach(viewModel.getAllRaces, id: \.self) { race in
                         Section(isExpanded: $viewModel.isShowingGroup) {
                             ForEach(viewModel.getAllCharacters(race), id: \.name){
-                                CardCharacter(character: $0, selectedCharacter: .constant([]))
+                                CardCharacter(character: $0, isSelectedMode: viewModel.isEditing, selectedCharacter: $viewModel.selectedChars)
                                     .listRowBackground(Color.clear)
                             }
                         } header: {
