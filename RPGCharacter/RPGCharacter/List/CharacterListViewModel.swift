@@ -28,14 +28,14 @@ class CharacterListViewModel {
         if isGrouped {
             return charactersByRace[race] ?? []
         } else {
-            return characters
+            return charactersFiltered
         }
     }
     
     
     private var charactersByRace: [String: [Character]] {
         var characterByRace: [String: [Character]] = [:]
-        characters.forEach{ char in
+        charactersFiltered.forEach{ char in
             // Caso já tenha essa chave no Array basta adicionar o Character
             if(characterByRace.keys.contains(char.race.rawValue)){
                 characterByRace[char.race.rawValue]?.append(char)
@@ -89,7 +89,17 @@ class CharacterListViewModel {
         characters.move(fromOffsets: indice, toOffset: newOffset)
     }
     
-    var characters: [Character] = [
+    private var charactersFiltered: [Character] {
+        characters.filter {
+            if self.searchText != "" {
+                return $0.name.localizedCaseInsensitiveContains(self.searchText)
+            } else {
+                return true
+            }
+        }
+    }
+    
+    private var characters: [Character] = [
         Character(name: "Ragnar", rpgClass: .archer, race: .dwarf),
         Character(name: "Ryuk", rpgClass: .blacksmith, race: .elf),
         Character(name: "Shori", rpgClass: .mage, race: .human),
