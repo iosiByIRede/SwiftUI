@@ -10,8 +10,11 @@ import SwiftUI
 @Observable
 class CharacterListViewModel {
     
+    var isEditing: Bool = false
     var isGrouped: Bool = false
     var isShowingGroup: Bool = true
+    
+    var selectedChars: [Character] = []
     
     var getAllRaces: [String] {
         self.isGrouped ? self.allRaces : [""]
