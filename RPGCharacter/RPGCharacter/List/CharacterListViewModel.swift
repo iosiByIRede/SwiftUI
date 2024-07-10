@@ -45,6 +45,12 @@ class CharacterListViewModel {
         return characterByRace
     }
     
+    func addCharacter() {
+        withAnimation {
+            characters.insert(returnRandomChar(), at: 0)
+        }
+    }
+    
     var characters: [Character] = [
         Character(name: "Ragnar", rpgClass: .archer, race: .dwarf),
         Character(name: "Ryuk", rpgClass: .blacksmith, race: .elf),

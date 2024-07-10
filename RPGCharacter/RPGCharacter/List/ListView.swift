@@ -46,6 +46,15 @@ struct ListView: View {
                         menu
                     }
                 }
+                ToolbarItem(placement: .primaryAction) {
+                    Button(action: {
+                        viewModel.addCharacter()
+                    }, label: {
+                        Image(systemName: "plus.circle")
+                            .font(.title2)
+                            .foregroundStyle(.white)
+                    })
+                }
             }
             .toolbarBackground(.hidden, for: .navigationBar)
         }
