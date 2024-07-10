@@ -54,7 +54,7 @@ struct CardCharacter: View {
         .gesture(
             TapGesture()
                 .onEnded({
-                    tapCard()
+//                    tapCard()
                 })
                 .simultaneously(with:
                                TapGesture()

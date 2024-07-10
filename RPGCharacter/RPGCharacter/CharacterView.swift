@@ -11,6 +11,8 @@ struct CharacterView: View {
     
     var character: Character
     
+    @State var isEditScreenShowing = false
+    
     var body: some View {
         ZStack {
             screenBackground
@@ -19,6 +21,9 @@ struct CharacterView: View {
                 
                 ZStack{
                     characterImage
+                        .padding(.top, -7)
+                    
+                    editButton
                     
                     characterHeader
                         .padding(.top, 249)
@@ -32,33 +37,51 @@ struct CharacterView: View {
         }
     }
     
+    var editButton: some View {
+        Button(action: {
+            self.isEditScreenShowing.toggle()
+        }) {
+            Circle()
+                .overlay {
+                    Image(systemName: "slider.vertical.3")
+                        .resizable()
+                        .foregroundStyle(.white)
+                        .padding(.vertical, 12)
+                        .padding(.horizontal, 12)
+                }
+                .foregroundStyle(Color(red: 0, green: 0, blue: 0, opacity: 0.60))
+                .frame(width: 43, height: 43)
+        }
+        .padding(.leading, 330)
+        .padding(.bottom, 234)
+        .fullScreenCover(isPresented: $isEditScreenShowing, content: {
+            NewCharacterView()
+        })
+    }
+    
     var screenBackground: some View {
         VStack(spacing: 0) {
             Image("bricksBG")
                 .resizable()
         }
         .overlay {
-            LinearGradient(colors: [Color.rpgGrayedBlue, Color.rpgLightBrown], startPoint: .top, endPoint: .bottom)
+            LinearGradient(colors: [Color.rpgBrown, Color.rpgDarkBrown], startPoint: .top, endPoint: .bottom)
                 .opacity(0.45)
         }
         .ignoresSafeArea()
     }
     
     var characterImage: some View {
-        character.image?
-            .resizable()
-            .shadow(radius: 100)
-            .scaledToFill()
-            .frame(width: 400, height: 300)
-//            .padding(.bo)
-            .clipped()
+        setCharacterImage(with: character)
     }
+    
+    
     
     var characterHeader: some View {
         ZStack {
             
             Rectangle()
-                .frame(height: 50)
+                .frame(height: 52)
                 .foregroundStyle(Color(red: 0, green: 0, blue: 0, opacity: 0.78))
             
             HStack {
@@ -85,12 +108,7 @@ struct CharacterView: View {
                 .overlay {
                     VStack {
                         ScrollView {
-                            Text(character.description)
-                                .padding(.horizontal, 30)
-                                .padding(.vertical, 30)
-                                .foregroundStyle(Color.white)
-                                .font(.system(size: 21))
-                            Spacer()
+                            setDescriptionLayout(with: character)
                         }
                     }
                 }
@@ -101,6 +119,42 @@ struct CharacterView: View {
         }
     }
     
+    @ViewBuilder func setCharacterImage(with character: Character) -> some View {
+        if let unwrappedImage = character.image {
+            unwrappedImage
+                .resizable()
+                .shadow(radius: 100)
+                .scaledToFill()
+                .frame(width: 400, height: 300)
+                .clipped()
+        } else {
+            Image(systemName: character.rpgClass.getDefaultImage())
+                .resizable()
+                .foregroundStyle(Color(character.race.color))
+                .shadow(radius: 100)
+                .scaledToFit()
+                .frame(width: 150, height: 150)
+                .clipped()
+        }
+    }
+    
+    @ViewBuilder func setDescriptionLayout(with character: Character) -> some View {
+        if character.description != "" {
+            Text(character.description)
+                .padding(.horizontal, 30)
+                .padding(.vertical, 30)
+                .foregroundStyle(Color.white)
+                .font(.system(size: 21))
+                .italic()
+        } else {
+            Text("no description available")
+                .padding(.horizontal, 30)
+                .padding(.vertical, 190)
+                .foregroundStyle(Color.white)
+                .font(.system(size: 21))
+        }
+        
+    }
 }
 
 #Preview {

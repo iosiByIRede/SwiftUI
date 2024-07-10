@@ -11,7 +11,7 @@ struct ListView: View {
     
     @State var viewModel: CharacterListViewModel = .init()
     
-    @State var isSheetDisplayed: Bool = false
+    @State var isCharacterSheetPresented: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -62,8 +62,9 @@ struct ListView: View {
                                       selectedCharacter: $viewModel.selectedChars,
                                       isSelectedMode: viewModel.isEditing)
                         .onTapGesture(action: {
+                            print("aaa")
                             viewModel.selectedChar = char
-                            isSheetDisplayed.toggle()
+                            isCharacterSheetPresented.toggle()
                         })
 
                         .listRowBackground(Color.clear)
@@ -75,7 +76,7 @@ struct ListView: View {
                             .bold()
                     }
                 }
-                .sheet(isPresented: $isSheetDisplayed, content: {
+                .sheet(isPresented: $isCharacterSheetPresented, content: {
                     CharacterView(character: viewModel.selectedChar)
                 })
             }
