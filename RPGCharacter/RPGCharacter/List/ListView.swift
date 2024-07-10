@@ -21,6 +21,9 @@ struct ListView: View {
                                 CardCharacter(character: $0, isSelectedMode: viewModel.isEditing, selectedCharacter: $viewModel.selectedChars)
                                     .listRowBackground(Color.clear)
                             }
+                            .onDelete { indexSet in
+                                viewModel.deleteCharacter(indexSet: indexSet, race: race)
+                            }
                         } header: {
                             if viewModel.isGrouped {
                                 Text(race).foregroundColor(.white)

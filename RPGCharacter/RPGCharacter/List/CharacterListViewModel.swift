@@ -50,6 +50,31 @@ class CharacterListViewModel {
             characters.insert(returnRandomChar(), at: 0)
         }
     }
+
+    func deleteCharacter(indexSet: IndexSet, race: String) {
+        if(isGrouped){
+            let characterList: [Character] = getAllCharacters(race)
+            var characterToRemoveIndex: Int = 0
+            let characterToRemove: Character
+            
+            for index in indexSet {
+                characterToRemoveIndex = index
+            }
+            
+            characterToRemove = characterList[characterToRemoveIndex]
+            
+            withAnimation {
+                characters.removeAll { character in
+                    character == characterToRemove
+                }
+            }
+        }else {
+            withAnimation {
+                characters.remove(atOffsets: indexSet)
+            }
+        }
+        
+    }
     
     var characters: [Character] = [
         Character(name: "Ragnar", rpgClass: .archer, race: .dwarf),
