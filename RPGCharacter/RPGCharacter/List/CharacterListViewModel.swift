@@ -29,7 +29,7 @@ class CharacterListViewModel {
             return characters
         }
     }
-
+    
     
     private var charactersByRace: [String: [Character]] {
         var characterByRace: [String: [Character]] = [:]
@@ -50,7 +50,7 @@ class CharacterListViewModel {
             characters.insert(returnRandomChar(), at: 0)
         }
     }
-
+    
     func deleteCharacter(indexSet: IndexSet, race: String) {
         if(isGrouped){
             let characterList: [Character] = getAllCharacters(race)
@@ -73,7 +73,14 @@ class CharacterListViewModel {
                 characters.remove(atOffsets: indexSet)
             }
         }
-        
+    }
+    
+    func deleteSelectedChars() {
+        withAnimation {
+            characters.removeAll { character in
+                selectedChars.contains(character)
+            }
+        }
     }
     
     var characters: [Character] = [
@@ -83,9 +90,9 @@ class CharacterListViewModel {
         Character(name: "Witz", rpgClass: .merchant, race: .orc),
         Character(name: "Zakre", rpgClass: .swordsman, race: .dwarf),
     ]
-
+    
     private func returnRandomChar() -> Character {
-
+        
         let classes: [RPGClass] = [
             .archer,
             .blacksmith,

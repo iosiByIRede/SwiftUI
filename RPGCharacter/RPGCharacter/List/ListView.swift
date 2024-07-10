@@ -51,11 +51,12 @@ struct ListView: View {
                 }
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: {
-                        viewModel.addCharacter()
+                        if viewModel.isEditing { viewModel.deleteSelectedChars() }
+                        else { viewModel.addCharacter()}
                     }, label: {
-                        Image(systemName: "plus.circle")
+                        Image(systemName: viewModel.isEditing ? "trash" : "plus.circle")
                             .font(.title2)
-                            .foregroundStyle(.white)
+                            .foregroundStyle(viewModel.isEditing ? .red : .white)
                     })
                 }
             }
