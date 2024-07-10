@@ -14,7 +14,13 @@ struct ListView: View {
         NavigationStack {
             ZStack {
                 ImageBackgroundView()
-                characterList
+                VStack{
+                    RPGTextField(text: $viewModel.searchText)
+                    //                .padding(.top)
+                    //                .padding(.horizontal)
+                        .padding(EdgeInsets(top: 16, leading: 16, bottom: 0, trailing: 16))
+                    characterList
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .navigation) {

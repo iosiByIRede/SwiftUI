@@ -20,6 +20,8 @@ class CharacterListViewModel {
         self.isGrouped ? self.allRaces : [""]
     }
     
+    var searchText: String = ""
+    
     private var allRaces: [String] {Array(charactersByRace.keys.sorted())}
     
     func getAllCharacters(_ race: String) -> [Character] {
