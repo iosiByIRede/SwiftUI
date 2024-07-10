@@ -24,6 +24,9 @@ struct ListView: View {
                             .onDelete { indexSet in
                                 viewModel.deleteCharacter(indexSet: indexSet, race: race)
                             }
+                            .onMoveConditional(disabled: viewModel.isGrouped) { index, int in
+                                viewModel.moveCharacter(fromOffsets: index, toOffset: int)
+                            }
                         } header: {
                             if viewModel.isGrouped {
                                 Text(race).foregroundColor(.white)

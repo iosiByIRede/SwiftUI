@@ -83,6 +83,10 @@ class CharacterListViewModel {
         }
     }
     
+    func moveCharacter(fromOffsets indice: IndexSet, toOffset newOffset: Int) {
+        characters.move(fromOffsets: indice, toOffset: newOffset)
+    }
+    
     var characters: [Character] = [
         Character(name: "Ragnar", rpgClass: .archer, race: .dwarf),
         Character(name: "Ryuk", rpgClass: .blacksmith, race: .elf),
