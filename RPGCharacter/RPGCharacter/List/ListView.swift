@@ -41,49 +41,57 @@ struct ListView: View {
                 
                 ToolbarItem(placement: .primaryAction) {
                     if(viewModel.isEditing){
-                        Button {
-                            withAnimation {
-                                viewModel.selectedChars = []
-                                viewModel.isEditing.toggle()
-                            }
-                        } label: {
-                            Image(systemName: "checkmark.circle")
-                                .font(.title2)
-                                .foregroundStyle(.white)
-                        }
+                        checkedButton
                     }else {
-                        Menu {
-                            Button(viewModel.isGrouped ? "Desagrupar" : "Agrupar") {
-                                if viewModel.isGrouped {
-                                    viewModel.isShowingGroup = true
-                                }
-                                viewModel.isGrouped.toggle()
-                            }
-                            
-                            Button(viewModel.isShowingGroup ? "Colapsar" : "Expandir") {
-                                withAnimation {
-                                    viewModel.isShowingGroup.toggle()
-                                }
-                            }
-                            .disabled(!viewModel.isGrouped)
-                            
-                            Button("Edit") {
-                                withAnimation {
-                                    viewModel.selectedChars = []
-                                    viewModel.isEditing.toggle()
-                                }
-                            }
-                            
-                        } label: {
-                            Image(systemName: "ellipsis.circle")
-                                .font(.title2)
-                                .foregroundStyle(.white)
-                            
-                        }
+                        menu
                     }
                 }
             }
             .toolbarBackground(.hidden, for: .navigationBar)
+        }
+    }
+    
+    var checkedButton: some View {
+        Button {
+            withAnimation {
+                viewModel.selectedChars = []
+                viewModel.isEditing.toggle()
+            }
+        } label: {
+            Image(systemName: "checkmark.circle")
+                .font(.title2)
+                .foregroundStyle(.white)
+        }
+    }
+    
+    var menu: some View {
+        Menu {
+            Button(viewModel.isGrouped ? "Desagrupar" : "Agrupar") {
+                if viewModel.isGrouped {
+                    viewModel.isShowingGroup = true
+                }
+                viewModel.isGrouped.toggle()
+            }
+            
+            Button(viewModel.isShowingGroup ? "Colapsar" : "Expandir") {
+                withAnimation {
+                    viewModel.isShowingGroup.toggle()
+                }
+            }
+            .disabled(!viewModel.isGrouped)
+            
+            Button("Edit") {
+                withAnimation {
+                    viewModel.selectedChars = []
+                    viewModel.isEditing.toggle()
+                }
+            }
+            
+        } label: {
+            Image(systemName: "ellipsis.circle")
+                .font(.title2)
+                .foregroundStyle(.white)
+            
         }
     }
 }
