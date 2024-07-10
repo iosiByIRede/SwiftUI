@@ -14,28 +14,7 @@ struct ListView: View {
         NavigationStack {
             ZStack {
                 ImageBackgroundView()
-                List {
-                    ForEach(viewModel.getAllRaces, id: \.self) { race in
-                        Section(isExpanded: $viewModel.isShowingGroup) {
-                            ForEach(viewModel.getAllCharacters(race), id: \.name){
-                                CardCharacter(character: $0, isSelectedMode: viewModel.isEditing, selectedCharacter: $viewModel.selectedChars)
-                                    .listRowBackground(Color.clear)
-                            }
-                            .onDelete { indexSet in
-                                viewModel.deleteCharacter(indexSet: indexSet, race: race)
-                            }
-                            .onMoveConditional(disabled: viewModel.isGrouped) { index, int in
-                                viewModel.moveCharacter(fromOffsets: index, toOffset: int)
-                            }
-                        } header: {
-                            if viewModel.isGrouped {
-                                Text(race).foregroundColor(.white)
-                                    .font(.title)
-                            }
-                        }
-                    }
-                }
-                .scrollContentBackground(.hidden)
+                characterList
             }
             .toolbar {
                 ToolbarItem(placement: .navigation) {
@@ -78,6 +57,31 @@ struct ListView: View {
                 .font(.title2)
                 .foregroundStyle(.white)
         }
+    }
+    
+    var characterList: some View {
+        List {
+            ForEach(viewModel.getAllRaces, id: \.self) { race in
+                Section(isExpanded: $viewModel.isShowingGroup) {
+                    ForEach(viewModel.getAllCharacters(race), id: \.name){
+                        CardCharacter(character: $0, isSelectedMode: viewModel.isEditing, selectedCharacter: $viewModel.selectedChars)
+                            .listRowBackground(Color.clear)
+                    }
+                    .onDelete { indexSet in
+                        viewModel.deleteCharacter(indexSet: indexSet, race: race)
+                    }
+                    .onMoveConditional(disabled: viewModel.isGrouped) { index, int in
+                        viewModel.moveCharacter(fromOffsets: index, toOffset: int)
+                    }
+                } header: {
+                    if viewModel.isGrouped {
+                        Text(race).foregroundColor(.white)
+                            .font(.title)
+                    }
+                }
+            }
+        }
+        .scrollContentBackground(.hidden)
     }
     
     var menu: some View {
