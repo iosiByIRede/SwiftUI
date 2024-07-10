@@ -54,6 +54,13 @@ struct ListView: View {
                             }
                         }
                         .disabled(!viewModel.isGrouped)
+                        
+                        Button("Edit") {
+                            withAnimation {
+                                viewModel.selectedChars = []
+                                viewModel.isEditing.toggle()
+                            }
+                        }
 
                     } label: {
                         Image(systemName: "ellipsis.circle")
