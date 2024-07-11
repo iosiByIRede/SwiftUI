@@ -9,9 +9,7 @@ import SwiftUI
 import PhotosUI
 
 struct EditCharacterView: View {
-    
-    @Environment(\.dismiss) var dismiss
-    
+        
     @Binding var editedCharacter: Character
     @State var pickerItem: PhotosPickerItem?
     
@@ -115,7 +113,6 @@ struct EditCharacterView: View {
     var doneButton: some View {
         Button(action: {
             createCharacter(character: editedCharacter)
-            dismiss()
         }){
             RoundedRectangle(cornerRadius: 20)
                 .foregroundStyle(Color.blue)
@@ -157,11 +154,3 @@ struct EditCharacterView: View {
         
     }
 }
-
-//#Preview {
-//    EditCharacterView(editedCharacter: Character(image: Image("rpg"),
-//                                       name: "Jorgitozan",
-//                                       rpgClass: .blacksmith,
-//                                       race: .human,
-//                                       description: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there " ))
-//}

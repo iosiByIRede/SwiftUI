@@ -10,9 +10,7 @@ import SwiftUI
 struct CharacterView: View {
     
     @Binding var character: Character
-    
-    @State var isEditScreenShowing = false
-    
+        
     var body: some View {
         ZStack {
             screenBackground
@@ -39,7 +37,7 @@ struct CharacterView: View {
     
     var editButton: some View {
         Button(action: {
-            self.isEditScreenShowing.toggle()
+            //
         }) {
             Circle()
                 .overlay {
@@ -54,9 +52,6 @@ struct CharacterView: View {
         }
         .padding(.leading, 330)
         .padding(.bottom, 234)
-        .fullScreenCover(isPresented: $isEditScreenShowing, content: {
-            EditCharacterView(editedCharacter: $character)
-        })
     }
     
     var screenBackground: some View {
@@ -156,11 +151,3 @@ struct CharacterView: View {
         
     }
 }
-
-//#Preview {
-//    CharacterView(character: Character(image: Image("rpg"),
-//                                       name: "Jorgitozan",
-//                                       rpgClass: .blacksmith,
-//                                       race: .human,
-//                                       description: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there " ))
-//}

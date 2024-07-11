@@ -9,9 +9,7 @@ import SwiftUI
 
 struct ListView: View {
     @State var viewModel: CharacterListViewModel = CharacterListViewModel()
-    
-    @State var isCharacterSheetPresented: Bool = false
-    
+        
     var body: some View {
         NavigationStack {
             ZStack {
@@ -74,11 +72,6 @@ struct ListView: View {
                     ForEach(viewModel.getAllCharacters(race), id: \.name){ char in
                         CardCharacter(character: char, isSelectedMode: viewModel.isEditing, selectedCharacter: $viewModel.selectedChars)
                             .listRowBackground(Color.clear)
-                            .onTapGesture {
-                                print(char)
-                                viewModel.tappedCharacter = char
-                                self.isCharacterSheetPresented.toggle()
-                            }
                     }
                     .onDelete { indexSet in
                         viewModel.deleteCharacter(indexSet: indexSet, race: race)
@@ -94,9 +87,6 @@ struct ListView: View {
                 }
             }
         }
-        .sheet(isPresented: $isCharacterSheetPresented, content: {
-            CharacterView(character: $viewModel.tappedCharacter)
-        })
         .scrollContentBackground(.hidden)
     }
     
