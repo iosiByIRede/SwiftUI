@@ -18,6 +18,9 @@
 		0FD0E8E12C2B37C9008F566D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FD0E8E02C2B37C9008F566D /* Assets.xcassets */; };
 		0FD0E8E52C2B37C9008F566D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FD0E8E42C2B37C9008F566D /* Preview Assets.xcassets */; };
 		361ABFFC2C3D5D6800D4DFE1 /* CharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361ABFFB2C3D5D6800D4DFE1 /* CharacterView.swift */; };
+		366E67432C401B8D007B6D27 /* RPGImageStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366E67412C401B8D007B6D27 /* RPGImageStyle.swift */; };
+		366E67442C401B8D007B6D27 /* OnMoveConditional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366E67422C401B8D007B6D27 /* OnMoveConditional.swift */; };
+		366E67462C401B96007B6D27 /* ImageBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366E67452C401B96007B6D27 /* ImageBackgroundView.swift */; };
 		36E1E01A2C3F1B890005F04A /* EditCharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1E0192C3F1B890005F04A /* EditCharacterView.swift */; };
 		DD3CF57B2C35F75B0059F8CB /* CharacterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3CF57A2C35F75B0059F8CB /* CharacterModel.swift */; };
 		DDCFD0162C3C671F008FEA36 /* RPGPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCFD0152C3C671F008FEA36 /* RPGPicker.swift */; };
@@ -37,6 +40,9 @@
 		0FD0E8E22C2B37C9008F566D /* RPGCharacter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RPGCharacter.entitlements; sourceTree = "<group>"; };
 		0FD0E8E42C2B37C9008F566D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		361ABFFB2C3D5D6800D4DFE1 /* CharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterView.swift; sourceTree = "<group>"; };
+		366E67412C401B8D007B6D27 /* RPGImageStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RPGImageStyle.swift; path = "../../../../../Projects/Projeto Marretado/SwiftUI/RPGCharacter/RPGCharacter/List/Modifies/RPGImageStyle.swift"; sourceTree = "<group>"; };
+		366E67422C401B8D007B6D27 /* OnMoveConditional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnMoveConditional.swift; path = "../../../../../Projects/Projeto Marretado/SwiftUI/RPGCharacter/RPGCharacter/List/Modifies/OnMoveConditional.swift"; sourceTree = "<group>"; };
+		366E67452C401B96007B6D27 /* ImageBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageBackgroundView.swift; path = "../../../../../Projects/Projeto Marretado/SwiftUI/RPGCharacter/RPGCharacter/List/Components/ImageBackgroundView.swift"; sourceTree = "<group>"; };
 		36E1E0192C3F1B890005F04A /* EditCharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCharacterView.swift; sourceTree = "<group>"; };
 		DD3CF57A2C35F75B0059F8CB /* CharacterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModel.swift; sourceTree = "<group>"; };
 		DDCFD0152C3C671F008FEA36 /* RPGPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPGPicker.swift; sourceTree = "<group>"; };
@@ -56,6 +62,7 @@
 		0FA304772C37DC7900C6CC2A /* List */ = {
 			isa = PBXGroup;
 			children = (
+				366E67402C401B54007B6D27 /* Modifies */,
 				0FA3047C2C37DCAB00C6CC2A /* Components */,
 				0FA304782C37DC8D00C6CC2A /* ListView.swift */,
 				0FA3047A2C37DCA400C6CC2A /* CharacterListViewModel.swift */,
@@ -66,8 +73,9 @@
 		0FA3047C2C37DCAB00C6CC2A /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				0FA3047D2C37DCC100C6CC2A /* ImageCharacter.swift */,
+				366E67452C401B96007B6D27 /* ImageBackgroundView.swift */,
 				0FA3047F2C37DCCE00C6CC2A /* CardCharacter.swift */,
+				0FA3047D2C37DCC100C6CC2A /* ImageCharacter.swift */,
 				0FA304822C380BF300C6CC2A /* RPGTextField.swift */,
 				DDCFD0152C3C671F008FEA36 /* RPGPicker.swift */,
 			);
@@ -113,6 +121,15 @@
 				0FD0E8E42C2B37C9008F566D /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		366E67402C401B54007B6D27 /* Modifies */ = {
+			isa = PBXGroup;
+			children = (
+				366E67422C401B8D007B6D27 /* OnMoveConditional.swift */,
+				366E67412C401B8D007B6D27 /* RPGImageStyle.swift */,
+			);
+			path = Modifies;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,10 +203,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FA304832C380BF300C6CC2A /* RPGTextField.swift in Sources */,
+				366E67432C401B8D007B6D27 /* RPGImageStyle.swift in Sources */,
 				DD3CF57B2C35F75B0059F8CB /* CharacterModel.swift in Sources */,
 				0FD0E8DF2C2B37C7008F566D /* OnboardingView.swift in Sources */,
 				0FA304792C37DC8D00C6CC2A /* ListView.swift in Sources */,
 				36E1E01A2C3F1B890005F04A /* EditCharacterView.swift in Sources */,
+				366E67462C401B96007B6D27 /* ImageBackgroundView.swift in Sources */,
+				366E67442C401B8D007B6D27 /* OnMoveConditional.swift in Sources */,
 				361ABFFC2C3D5D6800D4DFE1 /* CharacterView.swift in Sources */,
 				0FD0E8DD2C2B37C7008F566D /* RPGCharacterApp.swift in Sources */,
 				0FA3047B2C37DCA400C6CC2A /* CharacterListViewModel.swift in Sources */,
@@ -326,7 +346,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RPGCharacter/Preview Content\"";
-				DEVELOPMENT_TEAM = B5BH4949Y8;
+				DEVELOPMENT_TEAM = 8D2H27TXKN;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -364,7 +384,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RPGCharacter/Preview Content\"";
-				DEVELOPMENT_TEAM = B5BH4949Y8;
+				DEVELOPMENT_TEAM = 8D2H27TXKN;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

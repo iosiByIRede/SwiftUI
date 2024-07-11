@@ -26,7 +26,7 @@ struct CharacterView: View {
                     editButton
                     
                     characterHeader
-                        .padding(.top, 249)
+                        .padding(.top, 242)
                 }
 
                 characterDescription
@@ -128,9 +128,9 @@ struct CharacterView: View {
                 .frame(width: 400, height: 300)
                 .clipped()
         } else {
-            Image(systemName: character.rpgClass.getDefaultImage())
+            character.rpgClass.defaultImage
                 .resizable()
-                .foregroundStyle(Color(character.race.color))
+                .foregroundStyle(character.race.color)
                 .shadow(radius: 100)
                 .scaledToFit()
                 .frame(width: 150, height: 150)

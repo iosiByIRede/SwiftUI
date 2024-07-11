@@ -26,9 +26,8 @@ struct EditCharacterView: View {
             VStack(alignment: .center) {
                 
                 characterImage
-                
-                doneButton
-                
+
+
                 Form {
                     Group {
                         characterNameForm
@@ -44,6 +43,8 @@ struct EditCharacterView: View {
                 .scrollContentBackground(.hidden)
                 .foregroundStyle(.white)
                 .fontWeight(.bold)
+                
+                doneButton
             }
         }
         .onChange(of: pickerItem) {
@@ -63,7 +64,7 @@ struct EditCharacterView: View {
                 .resizable()
         }
         .overlay {
-            LinearGradient(colors: [Color.rpgBrown, Color.rpgBlack], startPoint: .top, endPoint: .bottom)
+            LinearGradient(colors: [Color.rpgBrown, Color.rpgGrayedBlue], startPoint: .top, endPoint: .bottom)
                 .opacity(0.45)
         }
         .ignoresSafeArea()
@@ -116,7 +117,16 @@ struct EditCharacterView: View {
             createCharacter(character: editedCharacter)
             dismiss()
         }){
-            Image(systemName: "trash")
+            RoundedRectangle(cornerRadius: 20)
+                .foregroundStyle(Color.blue)
+                .frame(height: 80)
+                .padding(.horizontal, 40)
+                .overlay {
+                    Text("Edit Character")
+                        .foregroundStyle(.white)
+                        .font(.title2)
+                        .fontWeight(.bold)
+                }
         }
     }
     
@@ -129,7 +139,7 @@ struct EditCharacterView: View {
                 .frame(width: 160, height: 160)
             
         } else {
-            Image(systemName: character.rpgClass.getDefaultImage())
+            editedCharacter.rpgClass.defaultImage
                 .resizable()
                 .foregroundStyle(.white)
                 .frame(width: 80, height: 80)

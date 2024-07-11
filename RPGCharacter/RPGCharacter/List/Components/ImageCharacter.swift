@@ -8,60 +8,67 @@
 import SwiftUI
 
 struct ImageCharacter: View {
-    var image: Image?
-    var race: Race
-    var borderColor: Color { race.color }
-    var rpgClass: RPGClass
+    var char: Character
     var isSelectMode: Bool = false
     var isSelected: Bool = false
+    
+    @ViewBuilder var imgChar: some View {
+        if let imageUrl = char.image {
+            imageUrl
+                .rpgImageStyle()
+        } else {
+            char.rpgClass.defaultImage
+                .rpgImageStyleDefault(color: char.race.color)
+        }
+    }
     
     var body: some View {
         ZStack {
             Color.rpgDarkBrown
                 .clipShape(.rect(cornerRadius: 10))
             imgChar
+            
         }
-        .frame(width: 100, height: 100)
+        .frame(width: 80, height: 80)
         .overlay(
             RoundedRectangle(cornerRadius: 10)
-                .stroke(borderColor, lineWidth: 2)
+                .stroke(char.race.color, lineWidth: 2)
         )
         .overlay(alignment: .topTrailing) {
             if isSelectMode {
-                Circle()
-                    .fill(Color("rpgGrayedBlue"))
-                    .frame(width: 30, height: 30)
-                    .padding(-8)
-                    .overlay {
-                        if self.isSelected {
-                            Image(systemName: "checkmark.circle.fill")
-                                .foregroundStyle(.green)
-                                .font(.title)
-                        }
-                    }
+                selectCircle
             }
         }
     }
     
-    @ViewBuilder var imgChar: some View {
-        if let image {
-            image
-                .resizable()
-                .scaledToFill()
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-        } else {
-            Image(systemName: rpgClass.getDefaultImage())
-                .resizable()
-                .scaledToFit()
-                .padding(10)
-                .foregroundStyle(borderColor)
-        }
+    var selectCircle: some View {
+        Circle()
+            .fill(Color("rpgGrayedBlue"))
+            .frame(width: 20, height: 20)
+            .padding(-8)
+            .overlay {
+                if isSelected {
+                    Image(systemName: "checkmark.circle.fill")
+                        .foregroundStyle(.green)
+                        .font(.title2)
+                }
+            }
     }
 }
 
 #Preview {
     ZStack {
-        ImageCharacter(image: .init(.rpg), race: .dwarf, rpgClass: .archer)
+        ImageBackgroundView()
+        ImageCharacter(
+            char: Character(
+                image: Image(systemName: "rpg"),
+                name: "algo",
+                rpgClass: .archer,
+                race: .dwarf,
+                description: "Descr"
+            ),
+            isSelectMode: true,
+            isSelected: true
+        )
     }
-    .padding()
 }

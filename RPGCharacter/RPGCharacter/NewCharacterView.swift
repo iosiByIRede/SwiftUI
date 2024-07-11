@@ -138,7 +138,7 @@ struct NewCharacterView: View {
                 .frame(width: 160, height: 160)
             
         } else {
-            Image(systemName: character.rpgClass.getDefaultImage())
+            newCharacter.rpgClass.defaultImage
                 .resizable()
                 .foregroundStyle(.white)
                 .frame(width: 80, height: 80)

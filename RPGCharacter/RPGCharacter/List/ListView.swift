@@ -8,22 +8,22 @@
 import SwiftUI
 
 struct ListView: View {
-    
-    @State var viewModel: CharacterListViewModel = .init()
+    @State var viewModel: CharacterListViewModel = CharacterListViewModel()
     
     @State var isCharacterSheetPresented: Bool = false
     
     var body: some View {
         NavigationStack {
             ZStack {
-                imageBackground
-                VStack {
+                ImageBackgroundView()
+                VStack{
                     RPGTextField(text: $viewModel.searchText)
-                        .padding()
-                    groupedList
+                    //                .padding(.top)
+                    //                .padding(.horizontal)
+                        .padding(EdgeInsets(top: 16, leading: 16, bottom: 0, trailing: 16))
+                    characterList
                 }
             }
-            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigation) {
                     Text("Personagens")
@@ -31,103 +31,105 @@ struct ListView: View {
                         .font(.largeTitle)
                         .bold()
                 }
-            }
-            .toolbar {
-                ToolbarItem(placement: .automatic, content: {
-                    if viewModel.isEditing {
-                        okButton
-                    } else {
-                        menuPicker
+                
+                ToolbarItem(placement: .primaryAction) {
+                    if(viewModel.isEditing){
+                        checkedButton
+                    }else {
+                        menu
                     }
-                })
-                ToolbarItem(placement: .primaryAction, content: {
+                }
+                ToolbarItem(placement: .primaryAction) {
                     Button(action: {
-//                        NewCharacterView()
+                        if viewModel.isEditing { viewModel.deleteSelectedChars() }
+                        else { viewModel.addCharacter()}
                     }, label: {
-                        Image(systemName: "plus")
-                            .font(.title)
+                        Image(systemName: viewModel.isEditing ? "trash" : "plus.circle")
+                            .font(.title2)
+                            .foregroundStyle(viewModel.isEditing ? .red : .white)
                     })
-                })
+                }
             }
             .toolbarBackground(.hidden, for: .navigationBar)
         }
     }
     
-    var groupedList: some View {
+    var checkedButton: some View {
+        Button {
+            withAnimation {
+                viewModel.selectedChars = []
+                viewModel.isEditing.toggle()
+            }
+        } label: {
+            Image(systemName: "checkmark.circle")
+                .font(.title2)
+                .foregroundStyle(.white)
+        }
+    }
+    
+    var characterList: some View {
         List {
-            ForEach(viewModel.sortedRaceChar, id: \.description) { races in
-                Section(isExpanded: $viewModel.isShowing) {
-                    ForEach(races, id:\.name){ char in
-                        CardCharacter(character: char,
-                                      selectedCharacter: $viewModel.selectedChars,
-                                      isSelectedMode: viewModel.isEditing)
-                        .onTapGesture(action: {
-                            viewModel.tappedCharacter = char
-                            isCharacterSheetPresented.toggle()
-                        })
-                        .listRowBackground(Color.clear)
+            ForEach(viewModel.getAllRaces, id: \.self) { race in
+                Section(isExpanded: $viewModel.isShowingGroup) {
+                    ForEach(viewModel.getAllCharacters(race), id: \.name){ char in
+                        CardCharacter(character: char, isSelectedMode: viewModel.isEditing, selectedCharacter: $viewModel.selectedChars)
+                            .listRowBackground(Color.clear)
+                            .onTapGesture {
+                                print(char)
+                                viewModel.tappedCharacter = char
+                                self.isCharacterSheetPresented.toggle()
+                            }
+                    }
+                    .onDelete { indexSet in
+                        viewModel.deleteCharacter(indexSet: indexSet, race: race)
+                    }
+                    .onMoveConditional(disabled: viewModel.isGrouped) { index, int in
+                        viewModel.moveCharacter(fromOffsets: index, toOffset: int)
                     }
                 } header: {
-                    if let race = races.first {
-                        Text(race.race.rawValue).foregroundColor(.white)
+                    if viewModel.isGrouped {
+                        Text(race).foregroundColor(.white)
                             .font(.title)
-                            .bold()
                     }
                 }
-                .sheet(isPresented: $isCharacterSheetPresented,onDismiss: {
-                    print(viewModel.tappedCharacter)
-                }, content: {
-                    CharacterView(character: $viewModel.tappedCharacter)
-                })
             }
         }
+        .sheet(isPresented: $isCharacterSheetPresented, content: {
+            CharacterView(character: $viewModel.tappedCharacter)
+        })
         .scrollContentBackground(.hidden)
     }
     
-    var imageBackground: some View {
-        Image("bricksBG")
-            .resizable()
-            .overlay {
-                LinearGradient(colors: [Color.rpgGrayedBlue, Color.rpgLightBrown], startPoint: .top, endPoint: .bottom)
-                    .opacity(0.45)
-            }
-            .ignoresSafeArea()
-    }
-    
-    var menuPicker: some View {
+    var menu: some View {
         Menu {
-            Button("Agrupar") {
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    viewModel.isGrouped.toggle()
+            Button(viewModel.isGrouped ? "Desagrupar" : "Agrupar") {
+                if viewModel.isGrouped {
+                    viewModel.isShowingGroup = true
                 }
+                viewModel.isGrouped.toggle()
             }
-            Button("Colapsar") {
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    viewModel.isShowing.toggle()
+            
+            Button(viewModel.isShowingGroup ? "Colapsar" : "Expandir") {
+                withAnimation {
+                    viewModel.isShowingGroup.toggle()
                 }
             }
             .disabled(!viewModel.isGrouped)
+            
             Button("Edit") {
                 withAnimation {
                     viewModel.selectedChars = []
-                    self.viewModel.isEditing.toggle()
+                    viewModel.isEditing.toggle()
                 }
             }
+            
         } label: {
             Image(systemName: "ellipsis.circle")
-                .font(.title)
+                .font(.title2)
+                .foregroundStyle(.white)
+            
         }
     }
-    
-    var okButton: some View {
-        Button("OK") {
-            withAnimation {
-                viewModel.selectedChars = []
-                self.viewModel.isEditing.toggle()
-            }
-        }.font(.title2)
-    }
-    
 }
 
 #Preview {
