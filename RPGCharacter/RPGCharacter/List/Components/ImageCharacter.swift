@@ -13,11 +13,11 @@ struct ImageCharacter: View {
     var isSelected: Bool = false
     
     @ViewBuilder var imgChar: some View {
-        if let imageUrl = char.imageURL {
-            Image(imageUrl)
+        if let imageUrl = char.image {
+            imageUrl
                 .rpgImageStyle()
         } else {
-            Image(systemName: char.rpgClass.defaultImage)
+            char.rpgClass.defaultImage
                 .rpgImageStyleDefault(color: char.race.color)
         }
     }
@@ -61,7 +61,7 @@ struct ImageCharacter: View {
         ImageBackgroundView()
         ImageCharacter(
             char: Character(
-                imageURL: "rpg",
+                image: Image(systemName: "rpg"),
                 name: "algo",
                 rpgClass: .archer,
                 race: .dwarf,

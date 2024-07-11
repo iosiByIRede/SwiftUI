@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Character: Identifiable {
     var id: UUID = UUID()
-    var imageURL: String?
+    var image: Image?
     var name: String = "New Character"
     var rpgClass: RPGClass = .none
     var race: Race = .none
@@ -25,22 +25,22 @@ enum RPGClass: String, CaseIterable {
     case merchant
     case blacksmith
     
-    var defaultImage: String {
+    var defaultImage: Image {
         switch self {
         case .archer:
-            return "scope"
+            return Image(systemName: "scope")
         case .blacksmith:
-            return "hammer.fill"
+            return Image(systemName: "hammer.fill")
         case .mage:
-            return "book.fill"
+            return Image(systemName: "book.fill")
         case .swordsman:
-            return "shield.fill"
+            return Image(systemName: "shield.fill")
         case .novice:
-            return "cross.fill"
+            return Image(systemName: "cross.fill")
         case .merchant:
-            return "backpack"
+            return Image(systemName: "backpack")
         case .none:
-            return "person.fill"
+            return Image(systemName: "person.fill")
         }
     }
     

@@ -65,7 +65,7 @@ struct CardCharacter: View {
             .sheet(isPresented: .constant(true), content: {
                 CardCharacter(
                     character: Character(
-                        imageURL: "rpg",
+                        image: Image(systemName: "rpg"),
                         name: "name",
                         rpgClass: .archer,
                         race: .dwarf
