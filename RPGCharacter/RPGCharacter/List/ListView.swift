@@ -62,11 +62,9 @@ struct ListView: View {
                                       selectedCharacter: $viewModel.selectedChars,
                                       isSelectedMode: viewModel.isEditing)
                         .onTapGesture(action: {
-                            print("aaa")
-                            viewModel.selectedChar = char
+                            viewModel.tappedCharacter = char
                             isCharacterSheetPresented.toggle()
                         })
-
                         .listRowBackground(Color.clear)
                     }
                 } header: {
@@ -76,8 +74,10 @@ struct ListView: View {
                             .bold()
                     }
                 }
-                .sheet(isPresented: $isCharacterSheetPresented, content: {
-                    CharacterView(character: viewModel.selectedChar)
+                .sheet(isPresented: $isCharacterSheetPresented,onDismiss: {
+                    print(viewModel.tappedCharacter)
+                }, content: {
+                    CharacterView(character: $viewModel.tappedCharacter)
                 })
             }
         }

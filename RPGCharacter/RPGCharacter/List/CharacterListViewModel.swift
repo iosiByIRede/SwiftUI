@@ -10,8 +10,6 @@ import SwiftUI
 @Observable
 class CharacterListViewModel {
     
-    var selectedChar: Character = .init()
-    
     var allChar: [Character] = {
         (0...30).map { _ in .init().randomize() }
     }()
@@ -29,6 +27,8 @@ class CharacterListViewModel {
         }
         return races
     }
+    
+    var tappedCharacter: Character = .init()
     var selectedChars: [Character] = []
     var isEditing: Bool = false
     

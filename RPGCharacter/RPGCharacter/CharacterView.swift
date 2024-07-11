@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CharacterView: View {
     
-    var character: Character
+    @Binding var character: Character
     
     @State var isEditScreenShowing = false
     
@@ -55,7 +55,7 @@ struct CharacterView: View {
         .padding(.leading, 330)
         .padding(.bottom, 234)
         .fullScreenCover(isPresented: $isEditScreenShowing, content: {
-            NewCharacterView()
+            EditCharacterView(editedCharacter: $character)
         })
     }
     
@@ -157,10 +157,10 @@ struct CharacterView: View {
     }
 }
 
-#Preview {
-    CharacterView(character: Character(image: Image("rpg"),
-                                       name: "Jorgitozan",
-                                       rpgClass: .blacksmith,
-                                       race: .human,
-                                       description: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there " ))
-}
+//#Preview {
+//    CharacterView(character: Character(image: Image("rpg"),
+//                                       name: "Jorgitozan",
+//                                       rpgClass: .blacksmith,
+//                                       race: .human,
+//                                       description: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there " ))
+//}

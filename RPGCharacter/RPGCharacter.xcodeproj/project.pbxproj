@@ -18,6 +18,7 @@
 		0FD0E8E12C2B37C9008F566D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FD0E8E02C2B37C9008F566D /* Assets.xcassets */; };
 		0FD0E8E52C2B37C9008F566D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FD0E8E42C2B37C9008F566D /* Preview Assets.xcassets */; };
 		361ABFFC2C3D5D6800D4DFE1 /* CharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361ABFFB2C3D5D6800D4DFE1 /* CharacterView.swift */; };
+		36E1E01A2C3F1B890005F04A /* EditCharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1E0192C3F1B890005F04A /* EditCharacterView.swift */; };
 		DD3CF57B2C35F75B0059F8CB /* CharacterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3CF57A2C35F75B0059F8CB /* CharacterModel.swift */; };
 		DDCFD0162C3C671F008FEA36 /* RPGPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCFD0152C3C671F008FEA36 /* RPGPicker.swift */; };
 /* End PBXBuildFile section */
@@ -36,6 +37,7 @@
 		0FD0E8E22C2B37C9008F566D /* RPGCharacter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RPGCharacter.entitlements; sourceTree = "<group>"; };
 		0FD0E8E42C2B37C9008F566D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		361ABFFB2C3D5D6800D4DFE1 /* CharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterView.swift; sourceTree = "<group>"; };
+		36E1E0192C3F1B890005F04A /* EditCharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCharacterView.swift; sourceTree = "<group>"; };
 		DD3CF57A2C35F75B0059F8CB /* CharacterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModel.swift; sourceTree = "<group>"; };
 		DDCFD0152C3C671F008FEA36 /* RPGPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPGPicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -100,6 +102,7 @@
 				0FD0E8E32C2B37C9008F566D /* Preview Content */,
 				0FA304752C37DC0000C6CC2A /* NewCharacterView.swift */,
 				361ABFFB2C3D5D6800D4DFE1 /* CharacterView.swift */,
+				36E1E0192C3F1B890005F04A /* EditCharacterView.swift */,
 			);
 			path = RPGCharacter;
 			sourceTree = "<group>";
@@ -186,6 +189,7 @@
 				DD3CF57B2C35F75B0059F8CB /* CharacterModel.swift in Sources */,
 				0FD0E8DF2C2B37C7008F566D /* OnboardingView.swift in Sources */,
 				0FA304792C37DC8D00C6CC2A /* ListView.swift in Sources */,
+				36E1E01A2C3F1B890005F04A /* EditCharacterView.swift in Sources */,
 				361ABFFC2C3D5D6800D4DFE1 /* CharacterView.swift in Sources */,
 				0FD0E8DD2C2B37C7008F566D /* RPGCharacterApp.swift in Sources */,
 				0FA3047B2C37DCA400C6CC2A /* CharacterListViewModel.swift in Sources */,
