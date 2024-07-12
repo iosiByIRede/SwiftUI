@@ -1,10 +1,3 @@
-//
-//  NewCharacterView.swift
-//  RPGCharacter
-//
-//  Created by Gilberto Magno on 05/07/24.
-//
-
 import SwiftUI
 import PhotosUI
 

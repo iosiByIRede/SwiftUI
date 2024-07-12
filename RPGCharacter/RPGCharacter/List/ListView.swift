@@ -1,10 +1,3 @@
-//
-//  ListView.swift
-//  RPGCharacter
-//
-//  Created by Caio de Almeida Pessoa on 02/07/24.
-//
-
 import SwiftUI
 
 struct ListView: View {
@@ -18,8 +11,6 @@ struct ListView: View {
                 ImageBackgroundView()
                 VStack{
                     RPGTextField(text: $viewModel.searchText)
-                    //                .padding(.top)
-                    //                .padding(.horizontal)
                         .padding(EdgeInsets(top: 16, leading: 16, bottom: 0, trailing: 16))
                     characterList
                 }
