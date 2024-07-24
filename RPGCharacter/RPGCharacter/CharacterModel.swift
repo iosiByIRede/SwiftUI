@@ -4,6 +4,10 @@
 //
 //  Created by Ian Pacini on 03/07/24.
 //
+/*
+ Oi Pessoal, eu sou o Caio e nessa aula vamos aprender a adicionar Sections na nossa lista, vamos dar continuidade ao projeto da aula anterior adicionando uma opção de agrupar os personagens de acordo com sua Raça
+ Vamos ver como vai ficar nosso aplicativo no final dessa aula
+ */
 
 import SwiftUI
 

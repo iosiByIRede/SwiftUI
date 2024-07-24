@@ -14,19 +14,21 @@ struct ListView: View {
         NavigationStack {
             ZStack {
                 ImageBackgroundView()
-                List {
-                    ForEach(viewModel.getAllRaces, id: \.self) { race in
-                        Section(isExpanded: $viewModel.isShowingGroup) {
-                            ForEach(viewModel.getAllCharacters(race), id: \.name){
-                                CardCharacter(character: $0, selectedCharacter: .constant([]))
+                List() {
+                    ForEach(viewModel.getAllRaces, id: \.self){ race in
+                        Section(isExpanded: $viewModel.isExpanded) {
+                            ForEach(viewModel.getAllCharacters(race)){ character in
+                                CardCharacter(character: character, selectedCharacter: .constant([]))
                                     .listRowBackground(Color.clear)
                             }
+                            
                         } header: {
                             if viewModel.isGrouped {
                                 Text(race).foregroundColor(.white)
                                     .font(.title)
                             }
                         }
+
                     }
                 }
                 .scrollContentBackground(.hidden)
@@ -38,19 +40,19 @@ struct ListView: View {
                         .font(.largeTitle)
                         .bold()
                 }
-                
+
                 ToolbarItem(placement: .primaryAction) {
                     Menu {
-                        Button(viewModel.isGrouped ? "Desagrupar" : "Agrupar") {
+                        Button(viewModel.buttonGroupTitle) {
                             if viewModel.isGrouped {
-                                viewModel.isShowingGroup = true
+                                viewModel.isExpanded = true
                             }
                             viewModel.isGrouped.toggle()
                         }
                         
-                        Button(viewModel.isShowingGroup ? "Colapsar" : "Expandir") {
+                        Button(viewModel.buttonCollapsedTitle) {
                             withAnimation {
-                                viewModel.isShowingGroup.toggle()
+                                viewModel.isExpanded.toggle()
                             }
                         }
                         .disabled(!viewModel.isGrouped)
@@ -67,6 +69,7 @@ struct ListView: View {
         }
     }
 }
+
 
 #Preview {
     ListView()

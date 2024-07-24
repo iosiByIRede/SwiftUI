@@ -11,7 +11,14 @@ import SwiftUI
 class CharacterListViewModel {
     
     var isGrouped: Bool = false
-    var isShowingGroup: Bool = true
+    var isExpanded: Bool = true
+    
+    var buttonGroupTitle: String {
+        isGrouped ? "Desagrupar" : "Agrupar"
+    }
+    var buttonCollapsedTitle: String {
+        isExpanded ? "colapsar" : "Expandir"
+    }
     
     var getAllRaces: [String] {
         self.isGrouped ? self.allRaces : [""]
