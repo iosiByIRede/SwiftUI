@@ -2,16 +2,17 @@
 //  OnboardingView.swift
 //  RPGCharacter
 //
-//  Created by Gilberto Magno on 25/06/24.
+//  Created by Ian Pacini on 13/08/24.
 //
 
 import SwiftUI
 
 struct OnboardingView: View {
     var body: some View {
-        VStack {
-            // Aqui construirá a View de Onboarding
-        }
+        Text("Texto numa tela")
+            .font(.largeTitle)
+            .bold()
+            .foregroundStyle(.blue)
     }
 }
 
