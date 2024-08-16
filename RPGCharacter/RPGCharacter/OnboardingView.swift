@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct OnboardingView: View {
+    @State var isFinishedOnboarding: Bool = false
+    
     var body: some View {
         ZStack {
             ZStack {
@@ -20,6 +22,8 @@ struct OnboardingView: View {
             .ignoresSafeArea()
             
             VStack {
+                Text(isFinishedOnboarding ? "True" : "False")
+                
                 Image("OnboardingRPG")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -31,25 +35,34 @@ struct OnboardingView: View {
                     .foregroundStyle(.white)
                     .bold()
                 
-                Button(action: {}, label: {
-                    HStack {
-                        Text("Vamos lá")
-                        
-                        Image(systemName: "figure.archery")
-                    }
-                    .foregroundStyle(.black)
-                    .bold()
-                    .font(.title)
-                })
-                .padding(20)
-                .padding(.horizontal, 40)
-                .background {
-                    RoundedRectangle(cornerRadius: 20)
-                        .foregroundStyle(.white)
-                }
+                ButtonOnboarding(isFinishedOnboarding: $isFinishedOnboarding)
             }
         }
     }
+}
+
+struct ButtonOnboarding: View {
+    @Binding var isFinishedOnboarding: Bool
+    
+    var body: some View {
+        Button(action: {isFinishedOnboarding.toggle()}, label: {
+            HStack {
+                Text("Vamos lá")
+                
+                Image(systemName: "figure.archery")
+            }
+            .foregroundStyle(.black)
+            .bold()
+            .font(.title)
+        })
+        .padding(20)
+        .padding(.horizontal, 40)
+        .background {
+            RoundedRectangle(cornerRadius: 20)
+                .foregroundStyle(.white)
+        }
+    }
+    
 }
 
 #Preview {
